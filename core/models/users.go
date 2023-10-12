@@ -7,10 +7,10 @@ import (
 
 type Users struct {
 	Id          int
-	Identity    string
-	Name        string
-	Password    string
-	Email       string
+	Identity    string         `gorm:"identity;unique:uni_identity"`
+	Name        string         `gorm:"name;unique:uni_name"`
+	Password    string         `gorm:"password"`
+	Email       string         `gorm:"email;unique:uni_email"`
 	NowVolume   int64          `gorm:"now_volume"`
 	TotalVolume int64          `gorm:"total_volume"`
 	CreatedAt   time.Time      `gorm:"created"`
