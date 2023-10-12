@@ -1,0 +1,49 @@
+info(
+    desc: "用户中心"
+    author: "lisgroup"
+    email: "lisgroup@qq.com"
+)
+
+type UserRegisterRequest {
+    // 用户名密码
+    Name     string `json:"name"`
+    Password string `json:"password"`
+    // 邮箱
+    Email string `json:"email"`
+    // 验证码
+    Code string `json:"code"`
+}
+
+type SendEMailRequest {
+    Email string `json:"email"`
+}
+
+type UserLoginRequest {
+    Name     string `json:"name"`
+    Password string `json:"password"`
+}
+
+type SendEMailUserResponse {
+    Code int `json:"code"`
+}
+
+type UserResponse {
+    Token        string `json:"token"`
+    RefreshToken string `json:"refresh_token"`
+}
+
+@server(
+    group: member
+    prefix: /api/user
+)
+service core-api {
+    // 用户注册
+    @handler UserRegister
+    post /register (UserRegisterRequest) returns (UserResponse)
+    // 发送验证码发送
+    @handler MailCodeSendRegister
+    post /mail/code/send/register (SendEMailRequest) returns (SendEMailUserResponse)
+    // 用户登录
+    @handler UserLogin
+    post /login (UserLoginRequest) returns (UserResponse)
+}
