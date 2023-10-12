@@ -1,0 +1,22 @@
+Name: core-api
+Host: 0.0.0.0
+Port: 8899
+Timeout: 10000 # 单位毫秒
+# 秘钥
+Salt: 'aesSe8u11UzIUgsDDAGu21UzIBussGDG'
+# jwt 秘钥
+JwtKey: 'aesSe8u11UzIUgsDDAGu'
+# 163 发送邮件配置
+UserName: 'xxxx@163.com'
+MailPassword: 'xxxx'
+
+Mysql:
+  Dsn: root:password@tcp(mysql:3306)/bus_api?charset=utf8mb4&parseTime=True&loc=Local
+  MaxIdleConn: 10
+  MaxOpenConn: 50
+  MaxLifetime: 1 # 单位小时
+
+Redis:
+  Addr: redis:6379
+  Password:
+  DB: 0
