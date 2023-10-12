@@ -48,6 +48,7 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 		// return nil, errors.New("用户名或密码错误")
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "用户名或密码错误")
 	}
+	resp = new(types.UserResponse)
 	// 2. 获取token
 	resp.Token, err = helper.GenerateToken(user.Id, user.Identity, user.Name, define.TokenExpire)
 	if err != nil {

@@ -75,6 +75,6 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "token生成错误")
 	}
 	// 4. 获取刷新的token
-	resp.RefreshToken, err = helper.GenerateToken(int(user.Id), user.Identity, user.Name, define.RefreshTokenExpire)
+	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Name, define.RefreshTokenExpire)
 	return
 }

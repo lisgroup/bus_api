@@ -11,7 +11,7 @@ service core-api {
 	post /mail/code/send/register (SendEMailRequest) returns (SendEMailUserResponse)
 	// 用户登录
 	@handler UserLogin
-	get /user/login (UserLoginRequest) returns (UserResponse)
+	post /user/login (UserLoginRequest) returns (UserResponse)
 }
 
 @server (
