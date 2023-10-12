@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	authuser "bus_api/core/internal/handler/auth/user"
+	bus "bus_api/core/internal/handler/bus"
 	home "bus_api/core/internal/handler/home"
 	member "bus_api/core/internal/handler/member"
 	"bus_api/core/internal/svc"
@@ -13,6 +14,17 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/line_search",
+				Handler: bus.SearchHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/bus"),
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{
