@@ -44,7 +44,7 @@ func (l *MailCodeSendRegisterLogic) MailCodeSendRegister(req *types.SendEMailReq
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "该邮箱已注册")
 	}
 	// 2. 限制发送次数==每天最多发送5次，每分钟最多发送1次
-	dayKey := "email_register:" + time.Now().Format("2006-01-02_") + req.Email
+	dayKey := "email_register:" + time.Now().Format("20060102_") + req.Email
 	result, _ := l.svcCtx.Redis.Get(l.ctx, dayKey).Int()
 	if result > 5 {
 		// return nil, errors.New("今日发送次数已达上限")
