@@ -1,10 +1,10 @@
 package user
 
 import (
+	"bus_api/core/internal/logic/auth/user"
 	"bus_api/core/xerror"
 	"net/http"
 
-	"bus_api/core/internal/logic"
 	"bus_api/core/internal/svc"
 	"bus_api/core/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -19,7 +19,7 @@ func UserListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUserListLogic(r.Context(), svcCtx)
+		l := user.NewUserListLogic(r.Context(), svcCtx)
 		resp, err := l.UserList(&req)
 		if err != nil {
 			// httpx.ErrorCtx(r.Context(), w, err)

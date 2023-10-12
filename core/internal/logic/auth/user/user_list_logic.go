@@ -1,4 +1,4 @@
-package logic
+package user
 
 import (
 	"bus_api/core/define"

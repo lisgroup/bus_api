@@ -24,7 +24,5 @@ func NewHomeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HomeLogic {
 }
 
 func (l *HomeLogic) Home() (resp *types.HomeResp, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	return &types.HomeResp{}, nil
 }

@@ -1,7 +1,7 @@
 package user
 
 import (
-	"bus_api/core/internal/logic"
+	"bus_api/core/internal/logic/auth/user"
 	"bus_api/core/internal/svc"
 	"bus_api/core/internal/types"
 	"bus_api/core/xerror"
@@ -19,7 +19,7 @@ func UserDetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewUserDetailLogic(r.Context(), svcCtx)
+		l := user.NewUserDetailLogic(r.Context(), svcCtx)
 		resp, err := l.UserDetail(&req)
 		if err != nil {
 			// httpx.ErrorCtx(r.Context(), w, err)

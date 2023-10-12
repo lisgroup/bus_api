@@ -1,7 +1,7 @@
 package member
 
 import (
-	"bus_api/core/internal/logic"
+	"bus_api/core/internal/logic/member"
 	"bus_api/core/internal/svc"
 	"bus_api/core/internal/types"
 	"bus_api/core/xerror"
@@ -19,7 +19,7 @@ func MailCodeSendRegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := logic.NewMailCodeSendRegisterLogic(r.Context(), svcCtx)
+		l := member.NewMailCodeSendRegisterLogic(r.Context(), svcCtx)
 		resp, err := l.MailCodeSendRegister(&req)
 		if err != nil {
 			// httpx.ErrorCtx(r.Context(), w, err)
