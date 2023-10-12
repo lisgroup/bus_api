@@ -1,4 +1,4 @@
-package handler
+package member
 
 import (
 	"bus_api/core/internal/logic"
@@ -10,17 +10,17 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UserLoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func UserRegisterHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UserLoginRequest
+		var req types.UserRegisterRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			// httpx.ErrorCtx(r.Context(), w, err)
 			httpx.ErrorCtx(r.Context(), w, xerror.NewParamsFailedError(err.Error()))
 			return
 		}
 
-		l := logic.NewUserLoginLogic(r.Context(), svcCtx)
-		resp, err := l.UserLogin(&req)
+		l := logic.NewUserRegisterLogic(r.Context(), svcCtx)
+		resp, err := l.UserRegister(&req)
 		if err != nil {
 			// httpx.ErrorCtx(r.Context(), w, err)
 			httpx.ErrorCtx(r.Context(), w, xerror.NewParamsFailedError(err.Error()))

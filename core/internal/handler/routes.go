@@ -4,6 +4,9 @@ package handler
 import (
 	"net/http"
 
+	authuser "bus_api/core/internal/handler/auth/user"
+	home "bus_api/core/internal/handler/home"
+	member "bus_api/core/internal/handler/member"
 	"bus_api/core/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -15,24 +18,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodGet,
 				Path:    "/",
-				Handler: HomeHandler(serverCtx),
+				Handler: home.HomeHandler(serverCtx),
 			},
+		},
+		rest.WithPrefix("/"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/register",
-				Handler: UserRegisterHandler(serverCtx),
+				Path:    "/register",
+				Handler: member.UserRegisterHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/mail/code/send/register",
-				Handler: MailCodeSendRegisterHandler(serverCtx),
+				Handler: member.MailCodeSendRegisterHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/user/login",
-				Handler: UserLoginHandler(serverCtx),
+				Path:    "/login",
+				Handler: member.UserLoginHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/api/user"),
 	)
 
 	server.AddRoutes(
@@ -41,15 +51,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/user/list",
-					Handler: UserListHandler(serverCtx),
+					Path:    "/list",
+					Handler: authuser.UserListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/user/detail",
-					Handler: UserDetailHandler(serverCtx),
+					Path:    "/detail",
+					Handler: authuser.UserDetailHandler(serverCtx),
 				},
 			}...,
 		),
+		rest.WithPrefix("/api/user"),
 	)
 }

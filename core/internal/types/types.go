@@ -4,26 +4,6 @@ package types
 type HomeResp struct {
 }
 
-type UserRequest struct {
-	Name     string `json:"name,optional"`
-	Page     int    `json:"page,optional"`
-	PageSize int    `json:"page_size,optional"`
-}
-
-type UserListResponse struct {
-	List  []User `json:"users"`
-	Total int64  `json:"total"`
-}
-
-type User struct {
-	Id          int    `json:"id"`
-	Identity    string `json:"identity"`
-	Name        string `json:"name"`
-	Email       string `json:"email"`
-	NowVolume   int    `json:"now_volume"`
-	TotalVolume int    `json:"total_volume"`
-}
-
 type UserRegisterRequest struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
@@ -47,6 +27,26 @@ type SendEMailUserResponse struct {
 type UserResponse struct {
 	Token        string `json:"token"`
 	RefreshToken string `json:"refresh_token"`
+}
+
+type UserRequest struct {
+	Name     string `json:"name,optional"`
+	Page     int    `json:"page,optional"`
+	PageSize int    `json:"page_size,optional"`
+}
+
+type UserListResponse struct {
+	List  []User `json:"users"`
+	Total int64  `json:"total"`
+}
+
+type User struct {
+	Id          int    `json:"id"`
+	Identity    string `json:"identity"`
+	Name        string `json:"name"`
+	Email       string `json:"email"`
+	NowVolume   int    `json:"now_volume"`
+	TotalVolume int    `json:"total_volume"`
 }
 
 type UserDetailRequest struct {

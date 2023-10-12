@@ -1,4 +1,4 @@
-package handler
+package home
 
 import (
 	"bus_api/core/xerror"
