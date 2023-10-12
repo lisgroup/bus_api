@@ -40,7 +40,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.Auth},
 			[]rest.Route{
 				{
-					Method:  http.MethodGet,
+					Method:  http.MethodPost,
+					Path:    "/user/list",
+					Handler: UserListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
 					Path:    "/user/detail",
 					Handler: UserDetailHandler(serverCtx),
 				},

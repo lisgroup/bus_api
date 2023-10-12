@@ -18,9 +18,36 @@ service core-api {
 	middleware: Auth
 )
 service core-api {
+	// 用户列表
+	@handler UserList
+	post /user/list (UserRequest) returns (UserListResponse)
 	// 用户详情
 	@handler UserDetail
-	get /user/detail (UserDetailRequest) returns (UserDetailResponse)
+	post /user/detail (UserDetailRequest) returns (UserDetailResponse)
+}
+
+type UserRequest {
+	// 查询条件
+	Name string `json:"name,optional"`
+	// 分页
+	Page int `json:"page,optional"`
+	// 每页数量
+	PageSize int `json:"page_size,optional"`
+}
+
+type UserListResponse {
+	List []User `json:"users"`
+	// 总数
+	Total int64 `json:"total"`
+}
+
+type User {
+	Id          int    `json:"id"`
+	Identity    string `json:"identity"`
+	Name        string `json:"name"`
+	Email       string `json:"email"`
+	NowVolume   int    `json:"now_volume"`
+	TotalVolume int    `json:"total_volume"`
 }
 
 type UserRegisterRequest {
