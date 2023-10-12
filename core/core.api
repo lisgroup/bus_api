@@ -1,0 +1,61 @@
+type HomeResp {}
+
+service core-api {
+	@handler Home
+	get / returns (HomeResp)
+	// 用户注册
+	@handler UserRegister
+	post /user/register (UserRegisterRequest) returns (UserResponse)
+	// 发送验证码发送
+	@handler MailCodeSendRegister
+	post /mail/code/send/register (SendEMailRequest) returns (SendEMailUserResponse)
+	// 用户登录
+	@handler UserLogin
+	get /user/login (UserLoginRequest) returns (UserResponse)
+}
+
+@server (
+	middleware: Auth
+)
+service core-api {
+	// 用户详情
+	@handler UserDetail
+	get /user/detail (UserDetailRequest) returns (UserDetailResponse)
+}
+
+type UserRegisterRequest {
+	// 用户名密码
+	Name     string `json:"name"`
+	Password string `json:"password"`
+	// 邮箱
+	Email string `json:"email"`
+	// 验证码
+	Code string `json:"code"`
+}
+
+type SendEMailRequest {
+	Email string `json:"email"`
+}
+
+type UserLoginRequest {
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+type SendEMailUserResponse {
+	Code int `json:"code"`
+}
+
+type UserResponse {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refresh_token"`
+}
+
+type UserDetailRequest {
+	Identity string `json:"identity"`
+}
+
+type UserDetailResponse {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
