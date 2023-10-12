@@ -16,7 +16,7 @@ cp core/etc/core-api.yaml.example core/etc/core-api.yaml
 ```shell
 go run core/core.go -f core/etc/core-api.yaml
 ```
-5. 启动后浏览器访问 http://localhost:8899，如果需更改启动端口，可在 core-api.yaml 文件中配置。
+5. 启动后浏览器访问 http://localhost:8899 ，如果需更改启动端口，可在 core-api.yaml 文件中配置。
 
 ## 开发说明
 使用 go-zero 官方的工具生成代码：
