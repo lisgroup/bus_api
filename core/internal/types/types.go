@@ -10,9 +10,31 @@ type SearchResponse struct {
 }
 
 type LineList struct {
-	Linename string `json:"linename" desc:"线路名称"`
-	Lineto   string `json:"lineto" desc:"线路始发站"`
-	Lineid   string `json:"lineid" desc:"线路ID"`
+	Linename   string `json:"linename" desc:"线路名称"`
+	LineFromTo string `json:"line_from_to" desc:"线路始发站"`
+	Lineid     string `json:"lineid" desc:"线路ID"`
+}
+
+type LineRequest struct {
+	Lineid string `json:"lineid" desc:"线路ID"`
+}
+
+type LineResponse struct {
+	Linename    string     `json:"linename" desc:"线路名称"`
+	Lineto      string     `json:"lineto" desc:"目的地"`
+	Lineid      string     `json:"lineid" desc:"线路ID"`
+	Start       string     `json:"start" desc:"首班车时间"`
+	End         string     `json:"end" desc:"末班车时间"`
+	Directionid string     `json:"directionid" desc:"反向公交车编号"`
+	Timetable   string     `json:"timetable" desc:"时刻表"`
+	List        []LineInfo `json:"list" desc:"公交详情"`
+}
+
+type LineInfo struct {
+	Stationnum    string   `json:"stationnum" desc:"线路序号"`
+	Stationname   string   `json:"stationname" desc:"线路名称"`
+	Stationid     string   `json:"stationid" desc:"站台编号"`
+	Stationdetail []string `json:"stationdetail" desc:"站点进站公交列表"`
 }
 
 type HomeResp struct {
