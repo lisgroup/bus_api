@@ -12,6 +12,7 @@ type SearchResponse struct {
 type LineList struct {
 	Linename string `json:"linename" desc:"线路名称"`
 	Lineto   string `json:"lineto" desc:"线路始发站"`
+	Lineid   string `json:"lineid" desc:"线路ID"`
 }
 
 type HomeResp struct {

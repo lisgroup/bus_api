@@ -1,0 +1,29 @@
+info(
+    desc: "公交车管理"
+    author: "lisgroup"
+    email: "lisgroup@qq.com"
+)
+
+@server(
+    group: bus
+    prefix: /api/bus
+)
+service core-api {
+    // 公交搜索
+    @handler SearchHandler
+    post /search (SearchRequest) returns (SearchResponse)
+}
+
+type SearchRequest {
+    Linename string `json:"linename" desc:"线路名称"`
+}
+
+type SearchResponse {
+    List []LineList `json:"list" desc:"公交列表"`
+}
+
+type LineList {
+    Linename string `json:"linename" desc:"线路名称"`
+    Lineto   string `json:"lineto" desc:"线路始发站"`
+    Lineid   string `json:"lineid" desc:"线路ID"`
+}
