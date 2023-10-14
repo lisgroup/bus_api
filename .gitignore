@@ -15,4 +15,4 @@
 # vendor/
 
 # config file
-etc/core-api.yaml
+core/etc/core-api.yaml

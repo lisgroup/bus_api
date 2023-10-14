@@ -58,7 +58,7 @@ func (l *SearchLogic) Search(req *types.SearchRequest) (resp *types.SearchRespon
 		}
 		query := u.Query()
 		id := query.Get("id")
-		fmt.Printf("buslinename:%s, buslineto:%s, href:%s\n", buslinename, buslineto, id)
+		// fmt.Printf("buslinename:%s, buslineto:%s, href:%s\n", buslinename, buslineto, id)
 		line := types.LineList{
 			Linename:   buslinename,
 			LineFromTo: buslineto,
