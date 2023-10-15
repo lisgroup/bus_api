@@ -8,8 +8,6 @@ import (
 	"bus_api/core/models"
 	"bus_api/core/xerror"
 	"context"
-	"fmt"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -54,7 +52,7 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	// 2. 创建用户
 	user.Name = req.Name
 	user.Password, err = helper.GeneratePassword(req.Password)
-	fmt.Println(user.Password, err)
+	// fmt.Println(user.Password, err)
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "密码生成错误")
@@ -62,9 +60,9 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	user.Email = req.Email
 	user.Identity = helper.UUID()
 	tx := l.svcCtx.Gorm.Create(user)
-	fmt.Println(tx)
+	// fmt.Println(tx)
 	if tx.Error != nil {
-		fmt.Println(tx.Error)
+		// fmt.Println(tx.Error)
 		return nil, tx.Error
 	}
 	resp = new(types.UserResponse)
