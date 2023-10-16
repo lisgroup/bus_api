@@ -1,6 +1,6 @@
 Name: core-api
 Host: 0.0.0.0
-Port: 8899
+Port: 9999
 Timeout: 10000 # 单位毫秒
 # 秘钥
 Salt: 'aesSe8u11UzIUgsDDAGu21UzIBussGDG'
