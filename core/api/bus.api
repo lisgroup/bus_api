@@ -15,6 +15,19 @@ service core-api {
     // 公交详情--所有站台列表
     @handler LineHandler
     post /line (LineRequest) returns (LineResponse)
+    // server_j 通知
+    @handler NoticeHandler
+    post /notice (NoticeRequest) returns (NoticeResponse)
+}
+
+type NoticeRequest {
+    Key    string `json:"key" desc:"通知key"`
+    Cycle  string `json:"cycle" desc:"执行周期"`
+    Hour   string `json:"hour" desc:"小时"`
+    Minute string `json:"minute" desc:"分钟"`
+}
+
+type NoticeResponse {
 }
 
 type SearchRequest {
