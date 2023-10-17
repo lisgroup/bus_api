@@ -26,6 +26,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/line",
 				Handler: bus.LineHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/notice",
+				Handler: bus.NoticeHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/api/bus"),
 	)
