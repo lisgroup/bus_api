@@ -92,7 +92,7 @@ func (l *LineLogic) Line(req *types.LineRequest) (resp *types.LineResponse, err 
 	}
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
-		err = errors.New(fmt.Sprintf("http get error , code=%d, status=%s", result.StatusCode, result.Status))
+		err = errors.New(fmt.Sprintf("http get error , code=%d, status=%s", res.StatusCode, res.Status))
 		return
 	}
 	// 读取body

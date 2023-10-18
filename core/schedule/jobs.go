@@ -2,6 +2,7 @@ package schedule
 
 import (
 	"bus_api/core/models"
+	"bus_api/core/service"
 	"bus_api/core/service/push"
 	"context"
 	"fmt"
@@ -32,9 +33,39 @@ func (c NoticeJob) Run() {
 		logc.Error(ctx, tx.Error)
 		return
 	}
+	serv := service.NewBusService()
 	for _, notice := range notices {
 		if notice.Cycle == "day" {
 			// 判断是否5分钟内的任务
+			if inFiveMinute(int(notice.Hour), int(notice.Minute)) {
+				// 执行查询车次任务
+				resp, err := serv.RealtimeBusLine(notice.LineId)
+				if err != nil {
+					logc.Error(ctx, err)
+					continue
+				}
+				// 判断map中是否有对应的
+				if info, ok := resp[notice.StationId]; ok {
+					realBus := ""
+					for _, inTime := range info {
+						realBus += inTime.BusInfo + " " + inTime.InTime
+					}
+					// 通知对应的用户到站了
+					// 根据设置信息通知消息
+					title := fmt.Sprintf("线路:%s, 站台:%s 有公交到站了", notice.LineName, notice.StationName)
+					desp := fmt.Sprintf("线路:%s, 方向:%s, 站台:%s 有公交到站了，公交信息：%s", notice.LineName, notice.LineFromTo, notice.StationName, realBus)
+					server := push.NewServerJ(push.ServerJParam{
+						Key:   notice.JKey,
+						Title: title,
+						Desp:  desp,
+					})
+					err := server.Push()
+					if err != nil {
+						// 记录日志
+						logc.Error(ctx, err.Error())
+					}
+				}
+			}
 		}
 	}
 	// var spec int
@@ -42,17 +73,6 @@ func (c NoticeJob) Run() {
 	// case "day":
 	//
 	// }
-	// 根据设置信息通知消息 "SCT204585TYnW8nBPYBPoYoGeWaG6kap6j"
-	server := push.NewServerJ(push.ServerJParam{
-		Key:   c.Key,
-		Title: c.Title,
-		Desp:  c.Desp,
-	})
-	err := server.Push()
-	if err != nil {
-		// 记录日志
-		logc.Error(ctx, err.Error())
-	}
 }
 
 func inFiveMinute(hour, min int) bool {

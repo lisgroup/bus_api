@@ -6,10 +6,12 @@ type NoticeRequest struct {
 	Cycle       string `json:"cycle" desc:"执行周期"`
 	Hour        int8   `json:"hour" desc:"小时"`
 	Minute      int8   `json:"minute" desc:"分钟"`
-	StationName string `json:"station_name"`
-	LineFromTo  string `json:"line_from_to"`
+	LineId      string `json:"line_id"`
 	LineName    string `json:"line_name"`
+	LineFromTo  string `json:"line_from_to"`
+	StationNum  string `json:"station_num" desc:"线路序号"`
 	StationId   string `json:"station_id"`
+	StationName string `json:"station_name"`
 }
 
 type NoticeResponse struct {
