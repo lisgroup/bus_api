@@ -28,7 +28,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/notice",
+				Path:    "/notice_setting",
 				Handler: bus.NoticeHandler(serverCtx),
 			},
 		},

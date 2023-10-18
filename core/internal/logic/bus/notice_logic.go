@@ -1,11 +1,13 @@
 package bus
 
 import (
-	"context"
-
 	"bus_api/core/internal/svc"
 	"bus_api/core/internal/types"
-
+	"bus_api/core/models"
+	"context"
+	"errors"
+	"fmt"
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -25,10 +27,20 @@ func NewNoticeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *NoticeLogi
 
 func (l *NoticeLogic) Notice(req *types.NoticeRequest) (resp *types.NoticeResponse, err error) {
 	// Server酱通知
-	// 周期 { value: 'day', label: '每天' },
-	//        { value: 'hour', label: '每小时' },
-	//        { value: 'hour-n', label: 'N小时' },
-	//        { value: 'month', label: '工作日' }
+	// 判断类型
+	if req.Cycle != "day" && req.Cycle != "hour" && req.Cycle != "hour-n" && req.Cycle != "weekday" {
+		return nil, errors.New("")
+	}
+	notice := models.Notice{}
 
+	err = copier.Copy(&notice, &req)
+	if err != nil {
+		return nil, err
+	}
+	tx := l.svcCtx.Gorm.Model(models.Notice{}).Create(&notice)
+	fmt.Println(tx)
+	if tx.Error != nil {
+		return nil, err
+	}
 	return
 }

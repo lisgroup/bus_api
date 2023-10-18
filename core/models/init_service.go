@@ -9,18 +9,21 @@ import (
 	"time"
 )
 
+var Gorm *gorm.DB
+
 // InitMysql 初始化 MySQL 配置
 func InitMysql(dsn string, maxIdle, maxOpen, maxLifetime int) *gorm.DB {
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	var err error
+	Gorm, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
 	// 连接池设置
-	sqlDB, _ := db.DB()
+	sqlDB, _ := Gorm.DB()
 	sqlDB.SetMaxIdleConns(maxIdle)
 	sqlDB.SetMaxOpenConns(maxOpen)
 	sqlDB.SetConnMaxLifetime(time.Hour * time.Duration(maxLifetime))
-	return db
+	return Gorm
 }
 
 // InitRedis 初始化 Redis 配置

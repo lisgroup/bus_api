@@ -2,10 +2,14 @@
 package types
 
 type NoticeRequest struct {
-	Key    string `json:"key" desc:"通知key"`
-	Cycle  string `json:"cycle" desc:"执行周期"`
-	Hour   string `json:"hour" desc:"小时"`
-	Minute string `json:"minute" desc:"分钟"`
+	JKey        string `json:"j_key" desc:"通知key"`
+	Cycle       string `json:"cycle" desc:"执行周期"`
+	Hour        int8   `json:"hour" desc:"小时"`
+	Minute      int8   `json:"minute" desc:"分钟"`
+	StationName string `json:"station_name"`
+	LineFromTo  string `json:"line_from_to"`
+	LineName    string `json:"line_name"`
+	StationId   string `json:"station_id"`
 }
 
 type NoticeResponse struct {
