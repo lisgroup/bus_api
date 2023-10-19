@@ -9,7 +9,10 @@ import (
 	"time"
 )
 
-var Gorm *gorm.DB
+var (
+	Gorm  *gorm.DB
+	Redis *redis.Client
+)
 
 // InitMysql 初始化 MySQL 配置
 func InitMysql(dsn string, maxIdle, maxOpen, maxLifetime int) *gorm.DB {
@@ -28,11 +31,12 @@ func InitMysql(dsn string, maxIdle, maxOpen, maxLifetime int) *gorm.DB {
 
 // InitRedis 初始化 Redis 配置
 func InitRedis(addr, pwd string, db int) *redis.Client {
-	return redis.NewClient(&redis.Options{
+	Redis = redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: pwd,
 		DB:       db,
 	})
+	return Redis
 }
 
 // InitConfig 配置项设置

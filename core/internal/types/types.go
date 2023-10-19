@@ -2,19 +2,19 @@
 package types
 
 type NoticeRequest struct {
-	JKey               string `json:"j_key" desc:"通知key"`
-	Cycle              string `json:"cycle" desc:"执行周期"`
-	Hour               int8   `json:"hour" desc:"小时"`
-	Minute             int8   `json:"minute" desc:"分钟"`
-	LineId             string `json:"line_id"`
-	LineName           string `json:"line_name"`
-	LineFromTo         string `json:"line_from_to"`
-	StationNum         string `json:"station_num" desc:"线路序号"`
-	StationId          string `json:"station_id"`
-	StationName        string `json:"station_name"`
-	ArrivalEarlyMinute int8   `json:"arrival_early_minute" desc:"到站最早分钟数"`
-	ArrivalLastMinute  int8   `json:"arrival_last_minute" desc:"到站最早分钟数"`
-	NoticeTime         int8   `json:"notice_time" desc:"到站最早分钟数"`
+	JKey        string `json:"j_key" desc:"通知key"`
+	Cycle       string `json:"cycle" desc:"执行周期"`
+	Hour        int8   `json:"hour" desc:"小时"`
+	Minute      int8   `json:"minute" desc:"分钟"`
+	LineId      string `json:"line_id"`
+	LineName    string `json:"line_name"`
+	LineFromTo  string `json:"line_from_to"`
+	StationNum  string `json:"station_num" desc:"线路序号"`
+	StationId   string `json:"station_id"`
+	StationName string `json:"station_name"`
+	StartTime   string `json:"start_time" desc:"开始时间"`
+	EndTime     string `json:"end_time" desc:"结束时间"`
+	NoticeTime  int8   `json:"notice_time" desc:"提醒次数"`
 }
 
 type NoticeResponse struct {
