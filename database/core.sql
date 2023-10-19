@@ -52,7 +52,7 @@ CREATE TABLE `notice` (
     `station_name` varchar(60) NOT NULL DEFAULT '',
     `start_time` time NOT NULL COMMENT '开始时间',
     `end_time` time NOT NULL COMMENT '结束时间',
-    `notice_time` tinyint(4) NOT NULL DEFAULT '0' COMMENT '通知次数',
+    `notice_time` tinyint(4) NOT NULL DEFAULT '1' COMMENT '通知次数',
     `created_at` datetime DEFAULT NULL,
     `updated_at` datetime DEFAULT NULL,
     `deleted_at` datetime DEFAULT NULL,
