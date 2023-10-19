@@ -49,6 +49,7 @@ func (b *BusService) RealtimeBusLine(lineId string) (resp map[string][]BusInTime
 		err = errors.New(fmt.Sprintf("read body error:%s", err))
 		return
 	}
+	fmt.Println(string(bytes))
 	// 解析json数据
 	bs := Line{}
 	err = json.Unmarshal(bytes, &bs)
@@ -58,6 +59,7 @@ func (b *BusService) RealtimeBusLine(lineId string) (resp map[string][]BusInTime
 	}
 	// 解析 StandInfo 数据
 	if bs.Code == "0" {
+		fmt.Println(bs.Data.StandInfo)
 		return bs.Data.StandInfo, nil
 	}
 	return nil, errors.New(bs.Msg)

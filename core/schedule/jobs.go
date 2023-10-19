@@ -37,7 +37,7 @@ func (c NoticeJob) Run() {
 	for _, notice := range notices {
 		if notice.Cycle == "day" {
 			// 判断是否5分钟内的任务
-			if inFiveMinute(int(notice.Hour), int(notice.Minute)) {
+			if inMinute(int(notice.Hour), int(notice.Minute), 30*time.Minute) {
 				// 执行查询车次任务
 				resp, err := serv.RealtimeBusLine(notice.LineId)
 				if err != nil {
@@ -53,13 +53,14 @@ func (c NoticeJob) Run() {
 					// 通知对应的用户到站了
 					// 根据设置信息通知消息
 					title := fmt.Sprintf("线路:%s, 站台:%s 有公交到站了", notice.LineName, notice.StationName)
-					desp := fmt.Sprintf("线路:%s, 方向:%s, 站台:%s 有公交到站了，公交信息：%s", notice.LineName, notice.LineFromTo, notice.StationName, realBus)
+					desc := fmt.Sprintf("线路:%s, 方向:%s, 站台:%s 有公交到站了，公交信息：%s", notice.LineName, notice.LineFromTo, notice.StationName, realBus)
 					server := push.NewServerJ(push.ServerJParam{
 						Key:   notice.JKey,
 						Title: title,
-						Desp:  desp,
+						Desp:  desc,
 					})
-					err := server.Push()
+					fmt.Println(title, desc)
+					err = server.Push()
 					if err != nil {
 						// 记录日志
 						logc.Error(ctx, err.Error())
@@ -75,15 +76,15 @@ func (c NoticeJob) Run() {
 	// }
 }
 
-func inFiveMinute(hour, min int) bool {
+func inMinute(hour, min int, minute time.Duration) bool {
 	currentTime := time.Now()
 	targetTime := time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), hour, min, 0, 0, currentTime.Location())
 
-	beforeTime := targetTime.Add(-5 * time.Minute)
-	afterTime := targetTime.Add(5 * time.Minute)
+	beforeTime := targetTime.Add(-minute)
+	afterTime := targetTime.Add(minute)
 
 	if currentTime.After(beforeTime) && currentTime.Before(afterTime) {
-		fmt.Println("当前时间在的前后五分钟范围内")
+		fmt.Printf("当前时间在的前后%d分钟范围内", minute/time.Minute)
 		return true
 	}
 	return false

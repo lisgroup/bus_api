@@ -32,6 +32,10 @@ type NoticeRequest {
     StationNum string   `json:"station_num" desc:"线路序号"`
     StationId   string `json:"station_id"`
     StationName string `json:"station_name"`
+
+    ArrivalEarlyMinute int8 `json:"arrival_early_minute" desc:"到站最早分钟数"`
+    ArrivalLastMinute  int8 `json:"arrival_last_minute" desc:"到站最早分钟数"`
+    NoticeTime         int8 `json:"notice_time" desc:"到站最早分钟数"`
 }
 
 type NoticeResponse {

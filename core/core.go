@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bus_api/core/schedule"
 	"bus_api/core/xerror"
 	"flag"
 	"fmt"
@@ -46,5 +47,7 @@ func main() {
 	})
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
+	// 启动任务
+	schedule.RunCrontab()
 	server.Start()
 }

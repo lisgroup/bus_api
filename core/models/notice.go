@@ -21,6 +21,10 @@ type Notice struct {
 	StationId   string `gorm:"station_id"`
 	StationName string `gorm:"station_name"`
 
+	ArrivalEarlyMinute int8 `json:"arrival_early_minute" desc:"到站最早分钟数"`
+	ArrivalLastMinute  int8 `json:"arrival_last_minute" desc:"到站最早分钟数"`
+	NoticeTime         int8 `json:"notice_time" desc:"到站最早分钟数"`
+
 	CreatedAt time.Time      `gorm:"created_at"`
 	UpdatedAt time.Time      `gorm:"updated_at"`
 	DeletedAt gorm.DeletedAt `gorm:"deleted_at"`
