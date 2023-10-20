@@ -38,37 +38,39 @@ func (c NoticeJob) Run() {
 	serv := service.NewBusService()
 	for _, notice := range notices {
 		if notice.Cycle == "day" || notice.Cycle == "one" {
+			// 是否已经完成通知了
+			noticeKey := time.Now().Format("20060102") + "_notice_time:" + strconv.Itoa(notice.Id)
+			// 判断通知次数是否大于限制了
+			noticeTime, err := models.Redis.Get(ctx, noticeKey).Int()
+			if err != nil {
+				logc.Error(ctx, err)
+			}
+			if noticeTime >= int(notice.NoticeTime) {
+				logc.Info(ctx, "通知次数上限。。。")
+				if notice.Cycle == "one" {
+					// 移除计划
+					err = models.Gorm.Delete(&models.Notice{}, notice.Id).Error
+					if err != nil {
+						logc.Error(ctx, err)
+					}
+				} else {
+					// 修改结束时间为当前时间，防止继续请求接口
+					// err = models.Gorm.Model(&models.Notice{}).Where("id = ?", notice.Id).UpdateColumn("end_at", current).Error
+					// if err != nil {
+					// 	logc.Error(ctx, err)
+					// }
+				}
+				continue
+			}
+
 			// 执行查询车次任务
 			resp, err := serv.RealtimeBusLine(notice.LineId)
 			if err != nil {
 				logc.Error(ctx, err)
 				continue
 			}
-			noticeKey := time.Now().Format("20060102") + "_notice_time:" + strconv.Itoa(notice.Id)
 			// 判断map中是否有对应的
 			if info, ok := resp[notice.StationId]; ok {
-				// 判断通知次数是否大于限制了
-				noticeTime, err := models.Redis.Get(ctx, noticeKey).Int()
-				if err != nil {
-					logc.Error(ctx, err)
-				}
-				if noticeTime >= int(notice.NoticeTime) {
-					logc.Info(ctx, "通知次数上限。。。")
-					if notice.Cycle == "one" {
-						// 移除计划
-						err = models.Gorm.Delete(&models.Notice{}, notice.Id).Error
-						if err != nil {
-							logc.Error(ctx, err)
-						}
-					} else {
-						// 修改结束时间为当前时间，防止继续请求接口
-						err = models.Gorm.Model(&models.Notice{}).Where("id = ?", notice.Id).UpdateColumn("end_at", current).Error
-						if err != nil {
-							logc.Error(ctx, err)
-						}
-					}
-					continue
-				}
 				realBus := ""
 				for _, inTime := range info {
 					realBus += inTime.BusInfo + " " + inTime.InTime
