@@ -105,17 +105,3 @@ func (c NoticeJob) Run() {
 	//
 	// }
 }
-
-func inMinute(hour, min int, minuteBefore, minuteAfter time.Duration) bool {
-	currentTime := time.Now()
-	targetTime := time.Date(currentTime.Year(), currentTime.Month(), currentTime.Day(), hour, min, 0, 0, currentTime.Location())
-
-	beforeTime := targetTime.Add(-minuteBefore)
-	afterTime := targetTime.Add(minuteAfter)
-
-	if currentTime.After(beforeTime) && currentTime.Before(afterTime) {
-		fmt.Printf("当前时间在的前后%d--%d分钟范围内", minuteBefore/time.Minute, minuteAfter/time.Minute)
-		return true
-	}
-	return false
-}
