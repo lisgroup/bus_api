@@ -3,6 +3,7 @@ package models
 import (
 	"bus_api/core/define"
 	"bus_api/core/internal/config"
+	"context"
 	"github.com/go-redis/redis/v8"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -36,6 +37,11 @@ func InitRedis(addr, pwd string, db int) *redis.Client {
 		Password: pwd,
 		DB:       db,
 	})
+	_, err := Redis.Ping(context.Background()).Result()
+	if err != nil {
+		panic("redis init failed")
+	}
+
 	return Redis
 }
 

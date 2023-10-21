@@ -91,7 +91,7 @@ func (c NoticeJob) Run() {
 					logc.Error(ctx, err.Error())
 				} else {
 					// 通知次数++
-					err = models.Redis.Set(ctx, noticeKey, noticeTime+1, 86400).Err()
+					err = models.Redis.Set(ctx, noticeKey, noticeTime+1, time.Hour*24).Err()
 					if err != nil {
 						logc.Error(ctx, err)
 					}
