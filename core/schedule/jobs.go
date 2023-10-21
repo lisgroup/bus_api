@@ -6,6 +6,7 @@ import (
 	"bus_api/core/service/push"
 	"context"
 	"fmt"
+	"github.com/go-redis/redis/v8"
 	"github.com/zeromicro/go-zero/core/logc"
 	"strconv"
 	"time"
@@ -31,7 +32,7 @@ func (c NoticeJob) Run() {
 	current := time.Now().Format("15:04:05")
 	var notices []models.Notice
 	tx := models.Gorm.Model(&models.Notice{}).Where("start_time <= ?", current).Where("end_time >= ?", current).Find(&notices)
-	if tx.Error != nil {
+	if tx.Error != nil && tx.Error != redis.Nil {
 		logc.Error(ctx, tx.Error)
 		return
 	}
