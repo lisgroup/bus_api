@@ -11,6 +11,7 @@ const (
 )
 
 var (
+	AppUrl       string
 	Salt         string
 	JwtKey       string
 	UserName     string

@@ -15,6 +15,7 @@ type Config struct {
 		Password string
 		DB       int
 	}
+	AppUrl       string
 	Salt         string
 	JwtKey       string
 	UserName     string
