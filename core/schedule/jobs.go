@@ -1,6 +1,7 @@
 package schedule
 
 import (
+	"bus_api/core/define"
 	"bus_api/core/models"
 	"bus_api/core/service"
 	"bus_api/core/service/push"
@@ -79,7 +80,12 @@ func (c NoticeJob) Run() {
 				// 通知对应的用户到站了
 				// 根据设置信息通知消息
 				title := fmt.Sprintf("线路:%s, 站台:%s 有公交到站了", notice.LineName, notice.StationName)
-				desc := fmt.Sprintf("线路:%s, 方向:%s, 站台:%s 有公交到站了，公交信息：%s", notice.LineName, notice.LineFromTo, notice.StationName, realBus)
+				url := define.AppUrl + "/#/line?lineID=" + notice.LineId + "&to=" + notice.LineFromTo + "&lineName=" + notice.LineName
+				desc := fmt.Sprintf(`      [线路]:%s
+      [方向]:%s
+      [站台]:%s 到站了
+      [公交信息]:%s
+      [查看详情]:(%s)[%s]`, notice.LineName, notice.LineFromTo, notice.StationName, realBus, notice.LineName+notice.LineFromTo, url)
 				server := push.NewServerJ(push.ServerJParam{
 					Key:   notice.JKey,
 					Title: title,
