@@ -85,7 +85,7 @@ func (c NoticeJob) Run() {
       [方向]:%s
       [站台]:%s 到站了
       [公交信息]:%s
-      [查看详情]:(%s)[%s]`, notice.LineName, notice.LineFromTo, notice.StationName, realBus, notice.LineName+notice.LineFromTo, url)
+      [查看详情]:[%s](%s)`, notice.LineName, notice.LineFromTo, notice.StationName, realBus, notice.LineName+notice.LineFromTo, url)
 				server := push.NewServerJ(push.ServerJParam{
 					Key:   notice.JKey,
 					Title: title,
