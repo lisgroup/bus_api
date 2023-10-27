@@ -8,6 +8,7 @@ import (
 	bus "bus_api/core/internal/handler/bus"
 	home "bus_api/core/internal/handler/home"
 	member "bus_api/core/internal/handler/member"
+	no_auth "bus_api/core/internal/handler/no_auth"
 	"bus_api/core/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -83,6 +84,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 			}...,
 		),
+		rest.WithPrefix("/api/user"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/startCaptcha",
+				Handler: no_auth.GeeCodeHandler(serverCtx),
+			},
+		},
 		rest.WithPrefix("/api/user"),
 	)
 }

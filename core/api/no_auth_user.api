@@ -1,0 +1,27 @@
+info(
+	desc: "未登录操作"
+	author: "lisgroup"
+	email: "lisgroup@qq.com"
+)
+
+type GeeRequest {
+	Uuid string `json:"uuid,optional"`
+}
+
+type GeeResponse {
+	Challenge  string `json:"challenge"`
+	Gt         string `json:"gt"`
+	NewCaptcha bool   `json:"new_captcha"`
+	Success    int    `json:"success"`
+}
+
+@server(
+    group: no_auth
+    prefix: /api/user
+)
+
+service core-api {
+	// 极验验证
+	@handler GeeCode
+	post /startCaptcha (GeeRequest) returns (GeeResponse)
+}
