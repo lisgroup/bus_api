@@ -5,9 +5,10 @@ import (
 )
 
 const (
-	TokenExpire        = 3600
-	RefreshTokenExpire = 7200 * 24 * 7
-	CodeLength         = 4
+	TokenExpire            = 3600
+	RefreshTokenExpire     = 7200 * 24 * 7
+	CodeLength             = 4
+	GeeTestBypassStatusKey = "gt_server_bypass_status" // bypass状态存入redis时使用的key值
 )
 
 var (

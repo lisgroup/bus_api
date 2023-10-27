@@ -20,4 +20,8 @@ type Config struct {
 	JwtKey       string
 	UserName     string
 	MailPassword string
+
+	// 极验配置
+	GeeTestId  string
+	GeeTestKey string
 }

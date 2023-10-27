@@ -21,3 +21,7 @@ Redis:
   Addr: redis:6379
   Password:
   DB: 0
+
+# 极验配置
+GeeTestId: "c9c4facd1a6feeb80802222cbb74ca8e"
+GeeTestKey: "e4e298788aa8c768397639deb9b249a9"
