@@ -4,6 +4,25 @@ info(
     email: "lisgroup@qq.com"
 )
 
+@server(
+    group: member
+    prefix: /api/user
+)
+service core-api {
+    // 用户注册
+    @handler UserRegister
+    post /register (UserRegisterRequest) returns (UserResponse)
+    // 发送验证码发送
+    @handler MailCodeSendRegister
+    post /mail/code/send/register (SendEMailRequest) returns (SendEMailUserResponse)
+    // 用户登录
+    @handler UserLogin
+    post /login (UserLoginRequest) returns (UserResponse)
+	// 极验验证
+	@handler GeeCode
+	get /startCaptcha (GeeRequest) returns (GeeResponse)
+}
+
 type UserRegisterRequest {
     // 用户名密码
     Name     string `json:"name"`
@@ -32,18 +51,13 @@ type UserResponse {
     RefreshToken string `json:"refresh_token"`
 }
 
-@server(
-    group: member
-    prefix: /api/user
-)
-service core-api {
-    // 用户注册
-    @handler UserRegister
-    post /register (UserRegisterRequest) returns (UserResponse)
-    // 发送验证码发送
-    @handler MailCodeSendRegister
-    post /mail/code/send/register (SendEMailRequest) returns (SendEMailUserResponse)
-    // 用户登录
-    @handler UserLogin
-    post /login (UserLoginRequest) returns (UserResponse)
+type GeeRequest {
+	Uuid string `json:"uuid,optional"`
+}
+
+type GeeResponse {
+	Challenge  string `json:"challenge"`
+	Gt         string `json:"gt"`
+	NewCaptcha bool   `json:"new_captcha"`
+	Success    int    `json:"success"`
 }

@@ -84,6 +84,17 @@ type UserResponse struct {
 	RefreshToken string `json:"refresh_token"`
 }
 
+type GeeRequest struct {
+	Uuid string `json:"uuid,optional"`
+}
+
+type GeeResponse struct {
+	Challenge  string `json:"challenge"`
+	Gt         string `json:"gt"`
+	NewCaptcha bool   `json:"new_captcha"`
+	Success    int    `json:"success"`
+}
+
 type UserRequest struct {
 	Name     string `json:"name,optional"`
 	Page     int    `json:"page,optional"`
@@ -111,15 +122,4 @@ type UserDetailRequest struct {
 type UserDetailResponse struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
-}
-
-type GeeRequest struct {
-	Uuid string `json:"uuid,optional"`
-}
-
-type GeeResponse struct {
-	Challenge  string `json:"challenge"`
-	Gt         string `json:"gt"`
-	NewCaptcha bool   `json:"new_captcha"`
-	Success    int    `json:"success"`
 }

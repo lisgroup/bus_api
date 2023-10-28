@@ -2,7 +2,7 @@ import "api/bus.api"
 import "api/home.api"
 import "api/member.api"
 import "api/auth_user.api"
-import "api/no_auth_user.api"
+// import "api/no_auth_user.api"
 
 info(
 	title: "bus-api"
