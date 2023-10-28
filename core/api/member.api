@@ -25,7 +25,7 @@ service core-api {
 
 type UserRegisterRequest {
     // 用户名密码
-    Name     string `json:"name"`
+    Username     string `json:"username"`
     Password string `json:"password"`
     // 邮箱
     Email string `json:"email"`
@@ -38,7 +38,7 @@ type SendEMailRequest {
 }
 
 type UserLoginRequest {
-    Name     string `json:"name"`
+    Username     string `json:"username"`
     Password string `json:"password"`
 }
 

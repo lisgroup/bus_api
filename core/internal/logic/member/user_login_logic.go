@@ -30,7 +30,7 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 	// 登录逻辑
 	// 1. 查询用户
 	user := new(models.Users)
-	tx := l.svcCtx.Gorm.Where("name = ?", req.Name).First(user)
+	tx := l.svcCtx.Gorm.Where("name = ?", req.Username).First(user)
 	if tx.Error != nil {
 		// return nil, tx.Error
 		return nil, xerror.NewCodeError(xerror.RequestParamError, tx.Error.Error())
@@ -50,13 +50,13 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 	}
 	resp = new(types.UserResponse)
 	// 2. 获取token
-	resp.Token, err = helper.GenerateToken(user.Id, user.Identity, user.Name, define.TokenExpire)
+	resp.Token, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire)
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())
 	}
 	// 3. 获取刷新的token
-	resp.RefreshToken, err = helper.GenerateToken(int(user.Id), user.Identity, user.Name, define.RefreshTokenExpire)
+	resp.RefreshToken, err = helper.GenerateToken(int(user.Id), user.Identity, user.Username, define.RefreshTokenExpire)
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())

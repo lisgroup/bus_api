@@ -60,7 +60,7 @@ type HomeResp struct {
 }
 
 type UserRegisterRequest struct {
-	Name     string `json:"name"`
+	Username string `json:"username"`
 	Password string `json:"password"`
 	Email    string `json:"email"`
 	Code     string `json:"code"`
@@ -71,7 +71,7 @@ type SendEMailRequest struct {
 }
 
 type UserLoginRequest struct {
-	Name     string `json:"name"`
+	Username string `json:"username"`
 	Password string `json:"password"`
 }
 

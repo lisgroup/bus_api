@@ -20,14 +20,14 @@ func TestGorm(t *testing.T) {
 	sqlDB.SetMaxIdleConns(2)
 	sqlDB.SetMaxOpenConns(10)
 	sqlDB.SetConnMaxLifetime(time.Hour)
-	user := &models.Users{Name: "zz", Password: "111", DeletedAt: nil}
+	user := &models.Users{Username: "zz", Password: "111"}
 	tx := db.Create(user)
 	if tx.Error != nil {
 		t.Fatalf("insert err: %v\n", err)
 	}
 	// 查询数据
 	var res models.Users
-	tx = db.Where("name = ?", "zz").First(&res)
+	tx = db.Where("username = ?", "zz").First(&res)
 	if tx.Error != nil {
 		t.Fatalf("insert err: %v\n", err)
 	}

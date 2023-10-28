@@ -8,7 +8,7 @@ import (
 type Users struct {
 	Id          int
 	Identity    string         `gorm:"identity;size:36;unique:uni_identity"`
-	Name        string         `gorm:"name;size:60;unique:uni_name"`
+	Username    string         `gorm:"username;size:60;unique:uni_username"`
 	Password    string         `gorm:"password;size:128"`
 	Email       string         `gorm:"email;size:100;unique:uni_email"`
 	NowVolume   int64          `gorm:"now_volume"`

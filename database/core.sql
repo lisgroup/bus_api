@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
      `id` int unsigned NOT NULL AUTO_INCREMENT,
      `identity` varchar(36) NOT NULL DEFAULT '',
-     `name` varchar(60) NOT NULL DEFAULT '',
+     `username` varchar(60) NOT NULL DEFAULT '',
      `password` varchar(128) NOT NULL DEFAULT '',
      `email` varchar(100) NOT NULL DEFAULT '',
      `now_volume` int NOT NULL DEFAULT '0',
@@ -18,7 +18,7 @@ CREATE TABLE `users` (
      `updated_at` datetime DEFAULT NULL,
      `deleted_at` datetime DEFAULT NULL,
      PRIMARY KEY (`id`),
-     UNIQUE KEY `uni_name` (`name`),
+     UNIQUE KEY `uni_username` (`username`),
      UNIQUE KEY `uni_email` (`email`),
      UNIQUE KEY `uni_identity` (`identity`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='用户信息表';

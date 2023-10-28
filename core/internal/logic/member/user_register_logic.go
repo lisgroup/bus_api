@@ -28,7 +28,7 @@ func NewUserRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *User
 func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *types.UserResponse, err error) {
 	// 注册逻辑
 	// 0. 参数校验
-	if req.Name == "" || req.Password == "" || req.Email == "" {
+	if req.Username == "" || req.Password == "" || req.Email == "" {
 		// return nil, errors.New("参数错误")
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "参数错误")
 	}
@@ -44,13 +44,13 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	}
 	// 1. 查询用户是否存在
 	user := new(models.Users)
-	l.svcCtx.Gorm.Where("name = ?", req.Name).First(user)
+	l.svcCtx.Gorm.Where("name = ?", req.Username).First(user)
 	if user.Id != 0 {
 		// return nil, errors.New("用户已存在")
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "用户已存在")
 	}
 	// 2. 创建用户
-	user.Name = req.Name
+	user.Username = req.Username
 	user.Password, err = helper.GeneratePassword(req.Password)
 	// fmt.Println(user.Password, err)
 	if err != nil {
@@ -67,12 +67,12 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	}
 	resp = new(types.UserResponse)
 	// 3. 获取token
-	resp.Token, err = helper.GenerateToken(user.Id, user.Identity, user.Name, define.TokenExpire)
+	resp.Token, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire)
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "token生成错误")
 	}
 	// 4. 获取刷新的token
-	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Name, define.RefreshTokenExpire)
+	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.RefreshTokenExpire)
 	return
 }
