@@ -44,7 +44,7 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	}
 	// 1. 查询用户是否存在
 	user := new(models.Users)
-	l.svcCtx.Gorm.Where("name = ?", req.Username).First(user)
+	l.svcCtx.Gorm.Where("username = ?", req.Username).First(user)
 	if user.Id != 0 {
 		// return nil, errors.New("用户已存在")
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "用户已存在")

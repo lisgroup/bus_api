@@ -34,7 +34,7 @@ func (l *UserDetailLogic) UserDetail(req *types.UserDetailRequest) (resp *types.
 	if u.Id == 0 {
 		return nil, errors.New("用户不存在")
 	}
-	resp.Name = u.Name
+	resp.Name = u.Username
 	resp.Email = u.Email
 	return
 }
