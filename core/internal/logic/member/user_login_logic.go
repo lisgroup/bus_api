@@ -50,7 +50,7 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 	}
 	resp = new(types.UserResponse)
 	// 2. 获取token
-	resp.Token, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire)
+	resp.AccessToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire)
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())
@@ -61,5 +61,7 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())
 	}
+	resp.ExpiresIn = define.TokenExpire
+	resp.TokenType = "Bearer"
 	return
 }
