@@ -43,6 +43,10 @@ type SendEMailRequest {
 type UserLoginRequest {
     Username     string `json:"username"`
     Password string `json:"password"`
+    Uuid string `json:"uuid"`
+    GeeTestChallenge string `json:"geetest_challenge"`
+    GeeTestSeccode string `json:"geetest_seccode"`
+    GeeTestValidate string `json:"geetest_validate"`
 }
 
 type SendEMailUserResponse {

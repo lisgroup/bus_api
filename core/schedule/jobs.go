@@ -2,10 +2,12 @@ package schedule
 
 import (
 	"bus_api/core/define"
+	"bus_api/core/helper"
 	"bus_api/core/models"
 	"bus_api/core/service"
 	"bus_api/core/service/push"
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -111,4 +113,38 @@ func (c NoticeJob) Run() {
 	// case "day":
 	//
 	// }
+}
+
+type GeeTestJob struct {
+	Job
+}
+
+// Run 从 GeeTest 获取bypass状态
+func (g GeeTestJob) Run() {
+	redisStatus := "fail"
+	params := make(map[string]string)
+	params["gt"] = define.GeeTestId
+	resBody, err := helper.HttpGet(define.ByPassUrl, params)
+	if resBody == "" {
+		redisStatus = "fail"
+	} else {
+		resMap := make(map[string]interface{})
+		err = json.Unmarshal([]byte(resBody), &resMap)
+		if err != nil {
+			redisStatus = "fail"
+		}
+		if resMap["status"] == "success" {
+			redisStatus = "success"
+		} else {
+			redisStatus = "fail"
+		}
+	}
+	err = models.Redis.Set(context.Background(), define.GeeTestBypassStatusKey, redisStatus, time.Hour*24).Err()
+	// s, err := conn.Do("SET", define.GeeTestBypassStatusKey, redisStatus)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("bypass状态已经获取并存入redis,当前状态为-", redisStatus)
+	// time.Sleep(time.Duration(10) * time.Second)
 }

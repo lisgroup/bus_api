@@ -79,8 +79,8 @@ func (l *MailCodeSendRegisterLogic) SendEMailCode(mail, code string) error {
 	e := email.NewEmail()
 	e.From = "Get <" + define.UserName + ">"
 	e.To = []string{mail}
-	e.Subject = "测试验证码发送"
-	e.HTML = []byte("你的验证码为：<h2>" + code + "</h2>")
+	e.Subject = "注册验证码发送"
+	e.HTML = []byte("你的验证码是：<h2>" + code + "</h2>")
 	err := e.SendWithTLS("smtp.163.com:465", smtp.PlainAuth("", define.UserName, define.MailPassword, "smtp.163.com"),
 		&tls.Config{InsecureSkipVerify: true, ServerName: "smtp.163.com"})
 	if err != nil {

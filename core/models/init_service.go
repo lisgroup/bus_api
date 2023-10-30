@@ -56,4 +56,6 @@ func InitConfig(c config.Config) {
 	define.Salt = c.Salt
 	define.UserName = c.UserName
 	define.MailPassword = c.MailPassword
+	define.GeeTestId = c.GeeTestId
+	define.GeeTestKey = c.GeeTestKey
 }

@@ -8,7 +8,10 @@ import (
 	"errors"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
+	"io"
 	"math/rand"
+	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -91,4 +94,33 @@ func AnalyzeToken(token string) (*define.UserClaim, error) {
 		return uc, errors.New("invalid token")
 	}
 	return uc, err
+}
+
+// HttpGet 发送GET请求
+func HttpGet(getURL string, params map[string]string) (string, error) {
+	q := url.Values{}
+	if params != nil {
+		for key, val := range params {
+			q.Add(key, val)
+		}
+	}
+	req, err := http.NewRequest(http.MethodGet, getURL, nil)
+	if err != nil {
+		return "", errors.New("NewRequest fail")
+	}
+	req.URL.RawQuery = q.Encode()
+	client := &http.Client{Timeout: time.Duration(5) * time.Second}
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+	if res.StatusCode == 200 {
+		return string(body), nil
+	}
+	return "", nil
 }

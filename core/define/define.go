@@ -9,6 +9,8 @@ const (
 	RefreshTokenExpire     = 7200 * 24 * 7
 	CodeLength             = 4
 	GeeTestBypassStatusKey = "gt_server_bypass_status" // bypass状态存入redis时使用的key值
+	ByPassUrl              = "http://bypass.geetest.com/v1/bypass_status.php"
+	GeeTestCycleTime       = 100
 )
 
 var (
@@ -17,6 +19,8 @@ var (
 	JwtKey       string
 	UserName     string
 	MailPassword string
+	GeeTestId    string
+	GeeTestKey   string
 )
 
 // var JwtKey = "go-zero-pan-key"

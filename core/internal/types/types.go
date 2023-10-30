@@ -71,8 +71,12 @@ type SendEMailRequest struct {
 }
 
 type UserLoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username         string `json:"username"`
+	Password         string `json:"password"`
+	Uuid             string `json:"uuid"`
+	GeeTestChallenge string `json:"geetest_challenge"`
+	GeeTestSeccode   string `json:"geetest_seccode"`
+	GeeTestValidate  string `json:"geetest_validate"`
 }
 
 type SendEMailUserResponse struct {

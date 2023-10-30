@@ -5,7 +5,6 @@ import (
 	"bus_api/core/service/gee"
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"bus_api/core/internal/svc"
 	"bus_api/core/internal/types"
@@ -28,7 +27,7 @@ func NewGeeCodeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GeeCodeLo
 }
 
 func (l *GeeCodeLogic) GeeCode(req *types.GeeRequest) (resp *types.GeeResponse, err error) {
-	fmt.Println(req.Uuid)
+	// fmt.Println(req.Uuid)
 	// 获取redis缓存的bypass状态
 	bypassStatus := l.svcCtx.Redis.Get(l.ctx, define.GeeTestBypassStatusKey).String()
 	var result *gee.GeetestLibResult
