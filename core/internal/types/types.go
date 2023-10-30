@@ -125,3 +125,9 @@ type UserDetailResponse struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
+
+type UserInfoResponse struct {
+	Roles  []string `json:"roles"`
+	Name   string   `json:"name"`
+	Avatar string   `json:"avatar"`
+}

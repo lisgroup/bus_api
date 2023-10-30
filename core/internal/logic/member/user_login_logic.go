@@ -50,13 +50,13 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 	}
 	resp = new(types.UserResponse)
 	// 2. 获取token
-	resp.AccessToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire)
+	resp.AccessToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire, []string{user.Role})
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())
 	}
 	// 3. 获取刷新的token
-	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.RefreshTokenExpire)
+	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.RefreshTokenExpire, []string{user.Role})
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())

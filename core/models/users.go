@@ -11,6 +11,7 @@ type Users struct {
 	Username    string         `gorm:"username;size:60;unique:uni_username"`
 	Password    string         `gorm:"password;size:128"`
 	Email       string         `gorm:"email;size:100;unique:uni_email"`
+	Role        string         `gorm:"role;size:100;"`
 	NowVolume   int64          `gorm:"now_volume"`
 	TotalVolume int64          `gorm:"total_volume"`
 	CreatedAt   time.Time      `gorm:"created_at"`

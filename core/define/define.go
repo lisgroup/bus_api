@@ -22,9 +22,10 @@ var (
 // var JwtKey = "go-zero-pan-key"
 
 type UserClaim struct {
-	Id       int
-	Identity string
-	Name     string
+	Id       int      `json:"id"`
+	Identity string   `json:"identity"`
+	Name     string   `json:"name"`
+	Roles    []string `json:"roles"`
 	jwt.RegisteredClaims
 }
 

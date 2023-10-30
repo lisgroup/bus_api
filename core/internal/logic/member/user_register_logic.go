@@ -67,13 +67,13 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	}
 	resp = new(types.UserResponse)
 	// 3. 获取token
-	resp.AccessToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire)
+	resp.AccessToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.TokenExpire, []string{user.Role})
 	if err != nil {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, "token生成错误")
 	}
 	// 4. 获取刷新的token
-	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.RefreshTokenExpire)
+	resp.RefreshToken, err = helper.GenerateToken(user.Id, user.Identity, user.Username, define.RefreshTokenExpire, []string{user.Role})
 	resp.ExpiresIn = define.TokenExpire
 	resp.TokenType = "Bearer"
 	return

@@ -32,11 +32,12 @@ func CheckPassword(inputPassword, secretPassword string) (bool, error) {
 	return false, err
 }
 
-func GenerateToken(id int, identity, name string, second int) (string, error) {
+func GenerateToken(id int, identity, name string, second int, roles []string) (string, error) {
 	uc := define.UserClaim{
 		Id:       id,
 		Identity: identity,
 		Name:     name,
+		Roles:    roles,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Second * time.Duration(second))),
 		},
@@ -75,6 +76,10 @@ func GenerateCode(x ...int) string {
 // AnalyzeToken
 // Token 解析
 func AnalyzeToken(token string) (*define.UserClaim, error) {
+	// 判断 token 是不是以 Bearer 开头，如果是则去掉
+	if strings.HasPrefix(strings.ToLower(token), "bearer ") {
+		token = token[7:]
+	}
 	uc := new(define.UserClaim)
 	claims, err := jwt.ParseWithClaims(token, uc, func(token *jwt.Token) (interface{}, error) {
 		return []byte(define.JwtKey), nil

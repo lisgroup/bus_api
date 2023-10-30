@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"bus_api/core/helper"
+	"context"
 	"net/http"
 	"strconv"
 )
@@ -27,9 +28,13 @@ func (m *AuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			_, _ = w.Write([]byte(err.Error()))
 			return
 		}
+		ctx := r.Context()
+		ctx = context.WithValue(ctx, "id", uc.Id)
+		ctx = context.WithValue(ctx, "identity", uc.Identity)
+		ctx = context.WithValue(ctx, "name", uc.Name)
 		r.Header.Set("user_id", strconv.Itoa(uc.Id))
-		r.Header.Set("user_identity", uc.Identity)
-		r.Header.Set("user_name", uc.Name)
-		next(w, r)
+		// r.Header.Set("user_identity", uc.Identity)
+		// r.Header.Set("user_name", uc.Name)
+		next(w, r.WithContext(ctx))
 	}
 }
