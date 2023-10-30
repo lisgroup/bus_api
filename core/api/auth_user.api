@@ -39,15 +39,25 @@ type UserDetailResponse {
 }
 
 @server (
+    // jwt: Auth
 	middleware: Auth
 	group: auth/user
 	prefix: /api/user
 )
 service core-api {
+    // 用户信息
+    @handler UserInfo
+    get /info () returns (UserInfoResponse)
 	// 用户列表
 	@handler UserList
 	post /list (UserRequest) returns (UserListResponse)
 	// 用户详情
 	@handler UserDetail
 	post /detail (UserDetailRequest) returns (UserDetailResponse)
+}
+
+type UserInfoResponse {
+    roles  []string `json:"roles"`
+    Name   string `json:"name"`
+    Avatar string `json:"avatar"`
 }
