@@ -21,6 +21,9 @@ service core-api {
 	// 极验验证
 	@handler GeeCode
 	get /startCaptcha (GeeRequest) returns (GeeResponse)
+	// 退出登录
+	@handler UserLogout
+	post /logout () returns (UserLogoutResponse)
 }
 
 type UserRegisterRequest {
@@ -62,4 +65,7 @@ type GeeResponse {
 	Gt         string `json:"gt"`
 	NewCaptcha bool   `json:"new_captcha"`
 	Success    int    `json:"success"`
+}
+
+type UserLogoutResponse {
 }

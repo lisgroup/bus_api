@@ -97,6 +97,9 @@ type GeeResponse struct {
 	Success    int    `json:"success"`
 }
 
+type UserLogoutResponse struct {
+}
+
 type UserRequest struct {
 	Name     string `json:"name,optional"`
 	Page     int    `json:"page,optional"`

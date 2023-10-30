@@ -68,6 +68,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/startCaptcha",
 				Handler: member.GeeCodeHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/logout",
+				Handler: member.UserLogoutHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/api/user"),
 	)
