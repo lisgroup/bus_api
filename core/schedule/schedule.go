@@ -20,7 +20,7 @@ func RunCrontab() {
 	_ = ins.BindTaskAndSchedule(noticeJob.Name, fmt.Sprintf("@every %ds", noticeJob.Spec), noticeJob)
 	// 2. 轮询发送获取bypass状态请求的时间间隔10秒
 	geeTestJob := GeeTestJob{
-		Job{Name: "GeeTestJob:10s", CreatedAt: time.Now(), Spec: define.GeeTestCycleTime},
+		Job{Name: "GeeTestJob:100s", CreatedAt: time.Now(), Spec: define.GeeTestCycleTime},
 	}
 	_ = ins.BindTaskAndSchedule(geeTestJob.Name, fmt.Sprintf("@every %ds", geeTestJob.Spec), geeTestJob)
 }
