@@ -51,7 +51,9 @@ func (l *UserLoginLogLogic) UserLoginLog(req *types.LoginLogRequest) (resp *type
 		Where("DATE(FROM_UNIXTIME(login_time)) BETWEEN ? AND ?", start.Format("2006-01-02"), end.Format("2006-01-02")).
 		Group("login_date").
 		Find(&result)
-	var m map[string]int
+	// 初始化返回值
+	resp = &types.LoginLogResponse{}
+	var m = map[string]int{}
 	// 遍历输出结果
 	for _, entry := range result {
 		m[entry.LoginDate.Format("2006-01-02")] = entry.LoginCount
@@ -61,7 +63,6 @@ func (l *UserLoginLogLogic) UserLoginLog(req *types.LoginLogRequest) (resp *type
 		resp.Total++
 	}
 	// 3. 补全没有登录的日期
-	resp = &types.LoginLogResponse{}
 	for i := 0; i < section; i++ {
 		date := start.AddDate(0, 0, i).Format("2006-01-02")
 		resp.Date = append(resp.Date, date)
