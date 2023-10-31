@@ -138,3 +138,13 @@ type UserInfoResponse struct {
 	Name   string   `json:"name"`
 	Avatar string   `json:"avatar"`
 }
+
+type LoginLogRequest struct {
+	Section int8 `form:"section" query:"section"`
+}
+
+type LoginLogResponse struct {
+	Total        int64    `json:"total"`
+	Date         []string `json:"date"`
+	SuccessSlide []int    `json:"success_slide"`
+}

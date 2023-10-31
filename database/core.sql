@@ -71,4 +71,25 @@ CREATE TABLE `notice`
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4 COMMENT ='定时任务';
 
+DROP TABLE IF EXISTS `user_login_logs`;
+CREATE TABLE IF NOT EXISTS `user_login_logs`
+(
+    `id`          int(10) unsigned                        NOT NULL AUTO_INCREMENT,
+    `user_id`     int(10) unsigned                        NOT NULL DEFAULT '0' COMMENT 'user_id',
+    `ip`          varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ip',
+    `login_time`  varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '登录时间',
+    `address`     varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '地理位置',
+    `device`      varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备名称',
+    `device_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '设备类型',
+    `browser`     varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '浏览器',
+    `platform`    varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '操作系统',
+    `language`    varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '语言',
+    `created_at`  timestamp                               NULL     DEFAULT NULL,
+    `updated_at`  timestamp                               NULL     DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci
+  AUTO_INCREMENT = 1 comment '用户登录日志表';
+
 SET FOREIGN_KEY_CHECKS = 1;

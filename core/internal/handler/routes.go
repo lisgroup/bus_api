@@ -96,6 +96,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/detail",
 					Handler: authuser.UserDetailHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/login_log_report",
+					Handler: authuser.UserLoginLogHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithPrefix("/api/user"),
