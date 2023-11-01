@@ -59,6 +59,7 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 	}
 	user.Email = req.Email
 	user.Identity = helper.UUID()
+	user.Role = define.CustomerRole
 	tx := l.svcCtx.Gorm.Create(user)
 	// fmt.Println(tx)
 	if tx.Error != nil {

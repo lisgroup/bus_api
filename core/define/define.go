@@ -11,6 +11,9 @@ const (
 	GeeTestBypassStatusKey = "gt_server_bypass_status" // bypass状态存入redis时使用的key值
 	ByPassUrl              = "http://bypass.geetest.com/v1/bypass_status.php"
 	GeeTestCycleTime       = 100
+	SuperAdminRole         = "Super"    // 超级管理员角色
+	AdminRole              = "Admin"    // 管理员角色
+	CustomerRole           = "Customer" // 客户角色
 )
 
 var (
