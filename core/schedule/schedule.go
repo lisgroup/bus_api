@@ -1,7 +1,6 @@
 package schedule
 
 import (
-	"bus_api/core/define"
 	"fmt"
 	"time"
 )
@@ -19,8 +18,8 @@ func RunCrontab() {
 	ins := NewInstance()
 	_ = ins.BindTaskAndSchedule(noticeJob.Name, fmt.Sprintf("@every %ds", noticeJob.Spec), noticeJob)
 	// 2. 轮询发送获取bypass状态请求的时间间隔10秒
-	geeTestJob := GeeTestJob{
-		Job{Name: "GeeTestJob:100s", CreatedAt: time.Now(), Spec: define.GeeTestCycleTime},
-	}
-	_ = ins.BindTaskAndSchedule(geeTestJob.Name, fmt.Sprintf("@every %ds", geeTestJob.Spec), geeTestJob)
+	// geeTestJob := GeeTestJob{
+	// 	Job{Name: "GeeTestJob:100s", CreatedAt: time.Now(), Spec: define.GeeTestCycleTime},
+	// }
+	// _ = ins.BindTaskAndSchedule(geeTestJob.Name, fmt.Sprintf("@every %ds", geeTestJob.Spec), geeTestJob)
 }
