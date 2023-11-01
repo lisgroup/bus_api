@@ -9,6 +9,8 @@ import (
 	"bus_api/core/service/gee"
 	"bus_api/core/xerror"
 	"context"
+	"errors"
+	"github.com/go-redis/redis/v8"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -34,7 +36,7 @@ func (l *UserLoginLogic) UserLogin(req *types.UserLoginRequest) (resp *types.Use
 	validate := req.GeeTestValidate
 	secCode := req.GeeTestSeccode
 	bypassStatus, err := l.svcCtx.Redis.Get(l.ctx, define.GeeTestBypassStatusKey).Result()
-	if err != nil {
+	if err != nil && !errors.Is(err, redis.Nil) {
 		// return nil, err
 		return nil, xerror.NewCodeError(xerror.RequestParamError, err.Error())
 	}
