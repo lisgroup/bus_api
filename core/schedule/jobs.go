@@ -81,11 +81,10 @@ func (c NoticeJob) Run() {
 				}
 				// 通知对应的用户到站了
 				// 根据设置信息通知消息
-				title := fmt.Sprintf("线路:%s, 站台:%s 有公交到站了", notice.LineName, notice.StationName)
+				title := fmt.Sprintf("%s 到站:%s 啦~~~", notice.LineName, notice.StationName)
 				url := define.AppUrl + "/#/line?lineID=" + notice.LineId + "&to=" + notice.LineFromTo + "&lineName=" + notice.LineName
-				desc := fmt.Sprintf(`      [线路]:%s
-      [方向]:%s
-      [站台]:%s 到站了
+				desc := fmt.Sprintf(`      [线路方向]:%s %s
+      [到站站台]:%s
       [公交信息]:%s
       [查看详情]:[%s](%s)`, notice.LineName, notice.LineFromTo, notice.StationName, realBus, notice.LineName+notice.LineFromTo, url)
 				server := push.NewServerJ(push.ServerJParam{
