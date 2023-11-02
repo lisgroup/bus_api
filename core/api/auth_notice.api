@@ -14,6 +14,9 @@ service core-api {
 	// 通知列表
 	@handler List
 	get /list (NoticeListRequest) returns (NoticeListResponse)
+	// server_j 新增通知
+    @handler Add
+    post /add (NoticeAddRequest) returns (NoticeAddResponse)
 }
 
 type NoticeListRequest {
@@ -33,6 +36,11 @@ type NoticeListResponse {
 
 type Notice {
     Id          int64 `json:"id" desc:"id"`
+    NoticeAddRequest
+}
+
+
+type NoticeAddRequest {
     JKey        string `json:"j_key" desc:"通知key"`
     Cycle       string `json:"cycle" desc:"执行周期"`
     Hour        int8 `json:"hour" desc:"小时"`
@@ -41,11 +49,14 @@ type Notice {
     LineId      string `json:"line_id"`
     LineName    string `json:"line_name"`
     LineFromTo  string `json:"line_from_to"`
-    StationNum  string   `json:"station_num" desc:"线路序号"`
+    StationNum string   `json:"station_num" desc:"线路序号"`
     StationId   string `json:"station_id"`
     StationName string `json:"station_name"`
 
     StartTime  string `json:"start_time" desc:"开始时间"`
     EndTime    string `json:"end_time" desc:"结束时间"`
     NoticeTime int8 `json:"notice_time" desc:"提醒次数"`
+}
+
+type NoticeAddResponse {
 }

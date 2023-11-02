@@ -1,32 +1,34 @@
-package bus
+package notice
 
 import (
-	"bus_api/core/internal/svc"
-	"bus_api/core/internal/types"
 	"bus_api/core/models"
 	"context"
 	"errors"
 	"fmt"
 	"github.com/jinzhu/copier"
-	"github.com/zeromicro/go-zero/core/logx"
 	"time"
+
+	"bus_api/core/internal/svc"
+	"bus_api/core/internal/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type NoticeLogic struct {
+type AddLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewNoticeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *NoticeLogic {
-	return &NoticeLogic{
+func NewAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddLogic {
+	return &AddLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *NoticeLogic) Notice(req *types.NoticeRequest) (resp *types.NoticeResponse, err error) {
+func (l *AddLogic) Add(req *types.NoticeAddRequest) (resp *types.NoticeAddResponse, err error) {
 	// Server酱通知
 	// 判断类型
 	if req.Cycle != "day" && req.Cycle != "hour" && req.Cycle != "hour-n" && req.Cycle != "weekday" {
