@@ -172,3 +172,10 @@ type NoticeUpdateRequest struct {
 
 type NoticeUpdateResponse struct {
 }
+
+type NoticeDeleteRequest struct {
+	Id int64 `json:"id" desc:"id"`
+}
+
+type NoticeDeleteResponse struct {
+}

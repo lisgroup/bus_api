@@ -121,6 +121,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/update",
 					Handler: authnotice.UpdateHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: authnotice.DeleteHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithPrefix("/api/notice"),

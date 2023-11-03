@@ -19,6 +19,8 @@ service core-api {
     post /add (NoticeAddRequest) returns (NoticeAddResponse)
     @handler Update
     post /update (NoticeUpdateRequest) returns (NoticeUpdateResponse)
+    @handler Delete
+    post /delete (NoticeDeleteRequest) returns (NoticeDeleteResponse)
 }
 
 type NoticeListRequest {
@@ -69,4 +71,11 @@ type NoticeUpdateRequest {
 }
 
 type NoticeUpdateResponse {
+}
+
+type NoticeDeleteRequest {
+    Id          int64 `json:"id" desc:"id"`
+}
+
+type NoticeDeleteResponse {
 }
