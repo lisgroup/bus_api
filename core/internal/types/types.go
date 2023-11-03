@@ -141,6 +141,14 @@ type NoticeListResponse struct {
 	Total int64    `json:"total"`
 }
 
+type NoticeDetailRequest struct {
+	Id int64 `path:"id"`
+}
+
+type NoticeDetailResponse struct {
+	Notice
+}
+
 type Notice struct {
 	Id int64 `json:"id" desc:"id"`
 	NoticeAddRequest

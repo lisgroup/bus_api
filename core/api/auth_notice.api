@@ -17,6 +17,9 @@ service core-api {
 	// server_j 新增通知
     @handler Add
     post /add (NoticeAddRequest) returns (NoticeAddResponse)
+	// 通知详情
+	@handler Detail
+	get /:id (NoticeDetailRequest) returns (NoticeDetailResponse)
     @handler Update
     post /update (NoticeUpdateRequest) returns (NoticeUpdateResponse)
     @handler Delete
@@ -36,6 +39,14 @@ type NoticeListResponse {
 	List []Notice `json:"notice"`
 	// 总数
 	Total int64 `json:"total"`
+}
+
+type NoticeDetailRequest {
+    Id int64 `path:"id"`
+}
+
+type NoticeDetailResponse {
+    Notice
 }
 
 type Notice {

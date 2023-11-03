@@ -117,6 +117,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: authnotice.AddHandler(serverCtx),
 				},
 				{
+					Method:  http.MethodGet,
+					Path:    "/:id",
+					Handler: authnotice.DetailHandler(serverCtx),
+				},
+				{
 					Method:  http.MethodPost,
 					Path:    "/update",
 					Handler: authnotice.UpdateHandler(serverCtx),
