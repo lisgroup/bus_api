@@ -9,7 +9,7 @@ import (
 type Notice struct {
 	Id     int
 	UserId int    `gorm:"user_id;index:idx_user_id"`
-	JKey   string `gorm:"j_key;size:60;unique:j_key"`
+	JKey   string `gorm:"j_key;size:60;index:j_key"`
 	Cycle  string `gorm:"cycle;size:20;"`
 	Hour   int8   `gorm:"hour;"`
 	Minute int8   `gorm:"minute;"`
