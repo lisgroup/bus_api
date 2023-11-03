@@ -53,6 +53,8 @@ func (l *AddLogic) Add(req *types.NoticeAddRequest) (resp *types.NoticeAddRespon
 	if err != nil {
 		return nil, err
 	}
+	// 1. 获取用户信息
+	notice.UserId = l.ctx.Value("id").(int)
 	err = l.svcCtx.Gorm.Model(models.Notice{}).Create(&notice).Error
 	// fmt.Println(err)
 	if err != nil {

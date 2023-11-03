@@ -51,11 +51,16 @@ func (l *UpdateLogic) Update(req *types.NoticeUpdateRequest) (resp *types.Notice
 	if err != nil {
 		return nil, err
 	}
+	// 1. 获取用户信息
+	userId := l.ctx.Value("id").(int)
 	// 根据id更新
-	tx := l.svcCtx.Gorm.Model(models.Notice{}).Where("id = ?", req.Id).Updates(&notice)
+	tx := l.svcCtx.Gorm.Model(models.Notice{}).Where("id = ?", req.Id).Where("user_id = ?", userId).Updates(&notice)
 	// fmt.Println(tx)
 	if tx.Error != nil {
 		return nil, tx.Error
+	}
+	if tx.RowsAffected == 0 {
+		return nil, errors.New("没有找到该通知")
 	}
 	return
 }
