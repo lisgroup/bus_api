@@ -53,9 +53,9 @@ func (l *AddLogic) Add(req *types.NoticeAddRequest) (resp *types.NoticeAddRespon
 	if err != nil {
 		return nil, err
 	}
-	tx := l.svcCtx.Gorm.Model(models.Notice{}).Create(&notice)
-	fmt.Println(tx)
-	if tx.Error != nil {
+	err = l.svcCtx.Gorm.Model(models.Notice{}).Create(&notice).Error
+	// fmt.Println(err)
+	if err != nil {
 		return nil, err
 	}
 	return

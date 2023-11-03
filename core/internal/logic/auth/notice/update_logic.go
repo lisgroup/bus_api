@@ -55,7 +55,7 @@ func (l *UpdateLogic) Update(req *types.NoticeUpdateRequest) (resp *types.Notice
 	tx := l.svcCtx.Gorm.Model(models.Notice{}).Where("id = ?", req.Id).Updates(&notice)
 	// fmt.Println(tx)
 	if tx.Error != nil {
-		return nil, err
+		return nil, tx.Error
 	}
 	return
 }
