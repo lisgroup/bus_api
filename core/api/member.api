@@ -23,7 +23,7 @@ service core-api {
 	get /startCaptcha (GeeRequest) returns (GeeResponse)
 	// 退出登录
 	@handler UserLogout
-	post /logout () returns (UserLogoutResponse)
+	post /logout returns (UserLogoutResponse)
 }
 
 type UserRegisterRequest {

@@ -13,7 +13,7 @@ info(
 service core-api {
     // 用户信息
     @handler UserInfo
-    get /info () returns (UserInfoResponse)
+    get /info  returns (UserInfoResponse)
 	// 用户列表
 	@handler UserList
 	post /list (UserRequest) returns (UserListResponse)

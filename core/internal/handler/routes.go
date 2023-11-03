@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	authnotice "bus_api/core/internal/handler/auth/notice"
 	authuser "bus_api/core/internal/handler/auth/user"
 	bus "bus_api/core/internal/handler/bus"
 	home "bus_api/core/internal/handler/home"
@@ -104,5 +105,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithPrefix("/api/user"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Auth},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/list",
+					Handler: authnotice.ListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/api/notice"),
 	)
 }
