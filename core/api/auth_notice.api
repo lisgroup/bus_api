@@ -28,11 +28,11 @@ service core-api {
 
 type NoticeListRequest {
 	// 查询条件
-	Keyword string `json:"keyword,optional"`
+	Keyword string `form:"keyword,optional"`
 	// 分页
-	Page int `json:"page,optional"`
+	Page int `form:"page,optional"`
 	// 每页数量
-	PageSize int `json:"page_size,optional"`
+	PageSize int `form:"page_size,optional"`
 }
 
 type NoticeListResponse {

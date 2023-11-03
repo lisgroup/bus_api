@@ -131,9 +131,9 @@ type LoginLogResponse struct {
 }
 
 type NoticeListRequest struct {
-	Keyword  string `json:"keyword,optional"`
-	Page     int    `json:"page,optional"`
-	PageSize int    `json:"page_size,optional"`
+	Keyword  string `form:"keyword,optional"`
+	Page     int    `form:"page,optional"`
+	PageSize int    `form:"page_size,optional"`
 }
 
 type NoticeListResponse struct {

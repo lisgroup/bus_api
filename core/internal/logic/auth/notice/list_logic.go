@@ -41,7 +41,9 @@ func (l *ListLogic) List(req *types.NoticeListRequest) (resp *types.NoticeListRe
 	// 1. 查询用户
 	notice := new([]models.Notice)
 	resp = new(types.NoticeListResponse)
-	tx := l.svcCtx.Gorm
+	// 获取用户id
+	userId := l.ctx.Value("id").(int)
+	tx := l.svcCtx.Gorm.Model(notice).Where("user_id = ?", userId)
 	if len(req.Keyword) > 0 {
 		tx = tx.Where("line_name like ?", "%"+req.Keyword+"%").
 			Or("line_from_to like ?", "%"+req.Keyword+"%").
@@ -49,7 +51,7 @@ func (l *ListLogic) List(req *types.NoticeListRequest) (resp *types.NoticeListRe
 	}
 	// 分页查询
 	var total int64
-	err = tx.Model(notice).Count(&total).Error
+	err = tx.Count(&total).Error
 	if err != nil {
 		return
 	}
