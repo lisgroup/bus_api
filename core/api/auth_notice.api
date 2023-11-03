@@ -17,6 +17,8 @@ service core-api {
 	// server_j 新增通知
     @handler Add
     post /add (NoticeAddRequest) returns (NoticeAddResponse)
+    @handler Update
+    post /update (NoticeUpdateRequest) returns (NoticeUpdateResponse)
 }
 
 type NoticeListRequest {
@@ -59,4 +61,12 @@ type NoticeAddRequest {
 }
 
 type NoticeAddResponse {
+}
+
+type NoticeUpdateRequest {
+    Id          int64 `json:"id" desc:"id"`
+    NoticeAddRequest
+}
+
+type NoticeUpdateResponse {
 }

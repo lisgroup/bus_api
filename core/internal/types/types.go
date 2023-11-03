@@ -164,3 +164,11 @@ type NoticeAddRequest struct {
 
 type NoticeAddResponse struct {
 }
+
+type NoticeUpdateRequest struct {
+	Id int64 `json:"id" desc:"id"`
+	NoticeAddRequest
+}
+
+type NoticeUpdateResponse struct {
+}
