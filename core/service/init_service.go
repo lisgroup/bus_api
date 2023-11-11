@@ -1,8 +1,9 @@
-package models
+package service
 
 import (
 	"bus_api/core/define"
 	"bus_api/core/internal/config"
+	"bus_api/core/models"
 	"context"
 	"github.com/go-redis/redis/v8"
 	"gorm.io/driver/mysql"
@@ -28,7 +29,7 @@ func InitMysql(dsn string, maxIdle, maxOpen, maxLifetime int) *gorm.DB {
 	sqlDB.SetMaxOpenConns(maxOpen)
 	sqlDB.SetConnMaxLifetime(time.Hour * time.Duration(maxLifetime))
 	// 自动创建数据库
-	if err := Gorm.AutoMigrate(&Users{}, &ServerKey{}, &Notice{}, &UserLoginLog{}); err != nil {
+	if err := Gorm.AutoMigrate(&models.Users{}, &models.ServerKey{}, &models.Notice{}, &models.UserLoginLog{}); err != nil {
 		panic(err)
 	}
 	return Gorm
