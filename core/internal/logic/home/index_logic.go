@@ -9,20 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HomeLogic struct {
+type IndexLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HomeLogic {
-	return &HomeLogic{
+func NewIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) *IndexLogic {
+	return &IndexLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HomeLogic) Home() (resp *types.HomeResp, err error) {
-	return &types.HomeResp{}, nil
+func (l *IndexLogic) Index() (resp *types.IndexResponse, err error) {
+	resp = &types.IndexResponse{}
+	return
 }
