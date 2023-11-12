@@ -24,4 +24,11 @@ type Config struct {
 	// 极验配置
 	GeeTestId  string
 	GeeTestKey string
+	// 微信配置
+	Wechat struct {
+		AppId          string
+		AppSecret      string
+		Token          string
+		EncodingAESKey string
+	}
 }
