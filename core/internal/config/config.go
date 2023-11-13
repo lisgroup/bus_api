@@ -15,6 +15,13 @@ type Config struct {
 		Password string
 		DB       int
 	}
+	// 微信配置
+	WeChat struct {
+		AppId          string `json:"appId" yaml:"AppID"`
+		AppSecret      string `json:"appSecret" yaml:"AppSecret"`
+		Token          string `json:"token" yaml:"Token"`
+		EncodingAESKey string `json:"encodingAESKey" yaml:"EncodingAESKey"`
+	} `json:"wechat" yaml:"WeChat"`
 	AppUrl       string
 	Salt         string
 	JwtKey       string
@@ -24,11 +31,4 @@ type Config struct {
 	// 极验配置
 	GeeTestId  string
 	GeeTestKey string
-	// 微信配置
-	Wechat struct {
-		AppId          string
-		AppSecret      string
-		Token          string
-		EncodingAESKey string
-	}
 }

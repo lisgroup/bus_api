@@ -1,4 +1,4 @@
-package wechat
+package wechat_service
 
 import (
 	"context"

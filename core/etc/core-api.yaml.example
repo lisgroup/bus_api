@@ -27,8 +27,8 @@ GeeTestId: "c9c4facd1a6feeb80802222cbb74ca8e"
 GeeTestKey: "e4e298788aa8c768397639deb9b249a9"
 
 # 微信配置
-Wechat:
-  AppID: "wx21dd37cdded3f6f9",
-  AppSecret: "668ce07fdfccb498b00d193b939458c2",
-  Token: "gozero_bus_api",
+WeChat:
+  AppID: wx21dd37cdded3f6f9
+  AppSecret: 668ce07fdfccb498b00d193b939458c2
+  Token: gozero_bus_api
   EncodingAESKey: ""
