@@ -37,7 +37,10 @@ type LineInfo struct {
 	Stationdetail []string `json:"stationdetail" desc:"站点进站公交列表"`
 }
 
-type HomeResp struct {
+type IndexResponse struct {
+}
+
+type TokenResponse struct {
 }
 
 type UserRegisterRequest struct {

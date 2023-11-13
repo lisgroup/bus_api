@@ -4,13 +4,16 @@ info(
     email: "lisgroup@qq.com"
 )
 
-type HomeResp {}
+type IndexResponse {}
+type TokenResponse {}
 
 @server(
     group: home
     prefix: /
 )
 service core-api {
-    @handler Home
-    get / returns (HomeResp)
+    @handler Index
+    get / returns (IndexResponse)
+    @handler Token
+    get /token returns (TokenResponse)
 }

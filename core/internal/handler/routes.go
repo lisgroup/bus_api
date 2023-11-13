@@ -36,7 +36,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodGet,
 				Path:    "/",
-				Handler: home.HomeHandler(serverCtx),
+				Handler: home.IndexHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/token",
+				Handler: home.TokenHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/"),
