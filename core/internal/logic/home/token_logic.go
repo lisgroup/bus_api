@@ -1,7 +1,6 @@
 package home
 
 import (
-	"bus_api/core/service/wechat_service"
 	"context"
 	"fmt"
 	"github.com/silenceper/wechat/v2/officialaccount"
@@ -24,21 +23,21 @@ type TokenLogic struct {
 }
 
 func NewTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext, w http.ResponseWriter, r *http.Request) *TokenLogic {
-	account := wechat_service.NewOfficialAccount(ctx, svcCtx.Redis, svcCtx.Config)
+	// account := wechat_service.NewOfficialAccount(ctx, svcCtx.Redis, svcCtx.Config)
 	return &TokenLogic{
-		Logger:          logx.WithContext(ctx),
-		ctx:             ctx,
-		svcCtx:          svcCtx,
-		officialAccount: account.OfficialAccount,
-		r:               r,
-		w:               w,
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		// officialAccount: account.OfficialAccount,
+		r: r,
+		w: w,
 	}
 }
 
 func (l *TokenLogic) Token() (resp *types.TokenResponse, err error) {
 	// wechat token 处理
 	// 传入request和responseWriter
-	server := l.officialAccount.GetServer(l.r, l.w)
+	server := l.svcCtx.OfficialAccount.GetServer(l.r, l.w)
 	// 设置接收消息的处理方法
 	server.SetMessageHandler(func(msg *message.MixMessage) *message.Reply {
 		// TODO
