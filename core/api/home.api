@@ -4,8 +4,10 @@ info(
     email: "lisgroup@qq.com"
 )
 
-type IndexResponse {}
-type TokenResponse {}
+type IndexResponse {
+}
+type TokenResponse {
+}
 
 @server(
     group: home
@@ -16,4 +18,10 @@ service core-api {
     get / returns (IndexResponse)
     @handler Token
     get /token returns (TokenResponse)
+    @handler WechatOauth
+    get /wechat_oauth returns (OauthResponse)
+}
+
+type OauthResponse {
+    Token string `json:"token" desc:"token"`
 }

@@ -43,6 +43,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/token",
 				Handler: home.TokenHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/wechat_oauth",
+				Handler: home.WechatOauthHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/"),
 	)

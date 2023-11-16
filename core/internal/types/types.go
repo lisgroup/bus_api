@@ -43,6 +43,10 @@ type IndexResponse struct {
 type TokenResponse struct {
 }
 
+type OauthResponse struct {
+	Token string `json:"token" desc:"token"`
+}
+
 type UserRegisterRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`

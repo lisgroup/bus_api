@@ -12,6 +12,8 @@ type Users struct {
 	Password    string         `gorm:"password;size:128"`
 	Email       string         `gorm:"email;size:100;unique:uni_email"`
 	Role        string         `gorm:"role;size:100;"`
+	Openid      string         `gorm:"openid;size:100;"`  // 微信openid
+	Unionid     string         `gorm:"unionid;size:100;"` // 微信unionid
 	NowVolume   int64          `gorm:"now_volume"`
 	TotalVolume int64          `gorm:"total_volume"`
 	CreatedAt   time.Time      `gorm:"created_at"`
