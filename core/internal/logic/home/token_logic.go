@@ -3,7 +3,6 @@ package home
 import (
 	"context"
 	"fmt"
-	"github.com/silenceper/wechat/v2/officialaccount"
 	"github.com/silenceper/wechat/v2/officialaccount/message"
 	"net/http"
 
@@ -15,11 +14,11 @@ import (
 
 type TokenLogic struct {
 	logx.Logger
-	ctx             context.Context
-	svcCtx          *svc.ServiceContext
-	officialAccount *officialaccount.OfficialAccount
-	r               *http.Request
-	w               http.ResponseWriter
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	// officialAccount *officialaccount.OfficialAccount
+	r *http.Request
+	w http.ResponseWriter
 }
 
 func NewTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext, w http.ResponseWriter, r *http.Request) *TokenLogic {
