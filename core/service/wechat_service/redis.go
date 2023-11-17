@@ -22,9 +22,15 @@ type RedisOpts struct {
 	IdleTimeout int    `yml:"idle_timeout" json:"idle_timeout"` // second
 }
 
+var rds *Redis
+
 // NewRedis 实例化
 func NewRedis(ctx context.Context, conn *redis.Client) *Redis {
-	return &Redis{ctx: ctx, conn: conn}
+	if rds != nil {
+		return rds
+	}
+	rds = &Redis{ctx: ctx, conn: conn}
+	return rds
 }
 
 // SetConn 设置conn
