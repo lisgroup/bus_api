@@ -3,6 +3,7 @@ Host: 0.0.0.0
 Port: 9999
 Timeout: 10000 # 单位毫秒
 AppUrl: 'https://www.guke1.com'
+ApiUrl: 'https://api.guke1.com'
 # 秘钥
 Salt: 'aesSe8u11UzIUgsDDAGu21UzIBussGDG'
 # jwt 秘钥

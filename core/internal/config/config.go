@@ -23,6 +23,7 @@ type Config struct {
 		EncodingAESKey string `json:"encodingAESKey" yaml:"EncodingAESKey"`
 	} `json:"wechat" yaml:"WeChat"`
 	AppUrl       string
+	ApiUrl       string
 	Salt         string
 	JwtKey       string
 	UserName     string
