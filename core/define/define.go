@@ -18,6 +18,7 @@ const (
 
 var (
 	AppUrl       string
+	ApiUrl       string
 	Salt         string
 	JwtKey       string
 	UserName     string

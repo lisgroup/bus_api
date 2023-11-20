@@ -53,6 +53,7 @@ func InitRedis(addr, pwd string, db int) *redis.Client {
 // InitConfig 配置项设置
 func InitConfig(c config.Config) {
 	define.AppUrl = c.AppUrl
+	define.ApiUrl = c.ApiUrl
 	define.JwtKey = c.JwtKey
 	define.Salt = c.Salt
 	define.UserName = c.UserName
