@@ -47,6 +47,15 @@ type OauthResponse struct {
 	Token string `json:"token" desc:"token"`
 }
 
+type OauthCallbackRequest struct {
+	Code  string `form:"code"`
+	State string `form:"state,optional"`
+}
+
+type OauthCallbackResponse struct {
+	AccessToken string `json:"access_token" desc:"access_token"`
+}
+
 type UserRegisterRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`

@@ -48,6 +48,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/wechat_oauth",
 				Handler: home.WechatOauthHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/wechat_oauth_callback",
+				Handler: home.WechatOauthCallbackHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/"),
 	)

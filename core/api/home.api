@@ -20,8 +20,19 @@ service core-api {
     get /token returns (TokenResponse)
     @handler WechatOauth
     get /wechat_oauth returns (OauthResponse)
+    @handler WechatOauthCallback
+    get /wechat_oauth_callback (OauthCallbackRequest) returns (OauthCallbackResponse)
 }
 
 type OauthResponse {
     Token string `json:"token" desc:"token"`
+}
+
+type OauthCallbackRequest {
+    Code string `form:"code"`
+    State string `form:"state,optional"`
+}
+
+type OauthCallbackResponse {
+    AccessToken string `json:"access_token" desc:"access_token"`
 }
