@@ -30,15 +30,20 @@ func (l *WechatOauthCallbackLogic) WechatOauthCallback(req *types.OauthCallbackR
 	// 通过code换取网页授权access_token
 	// oauth := l.svcCtx.OpenOfficialAccount.PlatformOauth()
 	oa := l.svcCtx.OfficialAccount
-	oa.GetOauth().GetUserAccessToken(req.Code)
-	officialAccount := l.svcCtx.OpenOfficialAccount
-	openPlatform := l.svcCtx.OpenPlatform
-	componentAccessToken, err := openPlatform.GetComponentAccessToken()
+	accessToken, err := oa.GetOauth().GetUserAccessToken(req.Code)
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
 	}
-	accessToken, err := officialAccount.PlatformOauth().GetUserAccessToken(req.Code, l.svcCtx.Config.WeChat.AppId, componentAccessToken)
+	// 代第三方公众号实现网页授权
+	// officialAccount := l.svcCtx.OpenOfficialAccount
+	// openPlatform := l.svcCtx.OpenPlatform
+	// componentAccessToken, err := openPlatform.GetComponentAccessToken()
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return nil, err
+	// }
+	// accessToken, err := officialAccount.PlatformOauth().GetUserAccessToken(req.Code, l.svcCtx.Config.WeChat.AppId, componentAccessToken)
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
