@@ -3,7 +3,9 @@ package home
 import (
 	"bus_api/core/models"
 	"context"
+	"errors"
 	"fmt"
+	"gorm.io/gorm"
 
 	"bus_api/core/internal/svc"
 	"bus_api/core/internal/types"
@@ -56,7 +58,7 @@ func (l *WechatOauthCallbackLogic) WechatOauthCallback(req *types.OauthCallbackR
 	// 判断 users 表是否存在这个openid，不存在的插入数据，存在的返回用户信息
 	var user models.Users
 	err = l.svcCtx.Gorm.Model(&models.Users{}).Where("openid = ?", accessToken.OpenID).First(&user).Error
-	if err != nil {
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		fmt.Println(err)
 		return nil, err
 	}
