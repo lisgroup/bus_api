@@ -1,6 +1,7 @@
 package home
 
 import (
+	"bus_api/core/helper"
 	"bus_api/core/models"
 	"context"
 	"errors"
@@ -64,6 +65,7 @@ func (l *WechatOauthCallbackLogic) WechatOauthCallback(req *types.OauthCallbackR
 	}
 	if user.Id == 0 {
 		// 不存在的插入数据
+		user.Identity = helper.UUID()
 		user.Openid = accessToken.OpenID
 		user.Username = accessToken.OpenID[0:10]
 		user.Role = "Customer"
