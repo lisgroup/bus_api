@@ -29,7 +29,14 @@ func InitMysql(dsn string, maxIdle, maxOpen, maxLifetime int) *gorm.DB {
 	sqlDB.SetMaxOpenConns(maxOpen)
 	sqlDB.SetConnMaxLifetime(time.Hour * time.Duration(maxLifetime))
 	// 自动创建数据库
-	if err := Gorm.AutoMigrate(&models.Users{}, &models.ServerKey{}, &models.Notice{}, &models.UserLoginLog{}); err != nil {
+	autoTables := []interface{}{
+		&models.Users{},
+		&models.ServerKey{},
+		&models.Notice{},
+		&models.UserLoginLog{},
+		&models.WechatConfig{},
+	}
+	if err := Gorm.AutoMigrate(autoTables...); err != nil {
 		panic(err)
 	}
 	return Gorm
