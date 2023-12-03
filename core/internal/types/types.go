@@ -203,3 +203,35 @@ type NoticeDeleteRequest struct {
 
 type NoticeDeleteResponse struct {
 }
+
+type WechatRequest struct {
+	AppName  string `json:"app_name,optional"`
+	Page     int    `json:"page,optional"`
+	PageSize int    `json:"page_size,optional"`
+}
+
+type WechatListResponse struct {
+	List  []Wechat `json:"users"`
+	Total int64    `json:"total"`
+}
+
+type Wechat struct {
+	Id             int    `json:"id"`
+	AppName        string `json:"app_name"`
+	AppId          string `json:"app_id"`
+	Token          string `json:"token"`
+	EncodingAesKey string `json:"encoding_aes_key"`
+	Menu           string `json:"menu"`
+}
+
+type WechatDetailRequest struct {
+	Id string `json:"id"`
+}
+
+type WechatMenuRequest struct {
+	Id string `json:"id"`
+}
+
+type WechatMenu struct {
+	Menu string `json:"menu"`
+}

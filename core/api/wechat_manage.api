@@ -1,0 +1,59 @@
+info(
+	desc: "微信管理"
+	author: "lisgroup"
+	email: "lisgroup@qq.com"
+)
+
+@server (
+    // jwt: Auth
+	middleware: Auth
+	group: wechat
+	prefix: /api/wechat
+)
+service core-api {
+	// 微信配置列表
+	@handler List
+	post /list (WechatRequest) returns (WechatListResponse)
+	// 详情
+	@handler Detail
+	post /detail (WechatDetailRequest) returns (Wechat)
+	// 详情
+	@handler Menu
+	post /menu (WechatMenuRequest) returns (WechatMenu)
+}
+
+type WechatRequest {
+	// 查询条件
+	AppName string `json:"app_name,optional"`
+	// 分页
+	Page int `json:"page,optional"`
+	// 每页数量
+	PageSize int `json:"page_size,optional"`
+}
+
+type WechatListResponse {
+	List []Wechat `json:"users"`
+	// 总数
+	Total int64 `json:"total"`
+}
+
+type Wechat {
+	Id          int    `json:"id"`
+	AppName     string `json:"app_name"`
+	AppId       string `json:"app_id"`
+	Token       string `json:"token"`
+	EncodingAesKey string `json:"encoding_aes_key"`
+	Menu        string `json:"menu"`
+}
+
+type WechatDetailRequest {
+	Id string `json:"id"`
+}
+
+type WechatMenuRequest {
+	Id string `json:"id"`
+}
+
+type WechatMenu {
+	Menu string `json:"menu"`
+}

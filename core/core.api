@@ -4,6 +4,7 @@ import "api/member.api"
 import "api/auth_user.api"
 import "api/auth_notice.api"
 // import "api/no_auth_user.api"
+import "api/wechat_manage.api"
 
 info(
 	title: "bus-api"

@@ -9,6 +9,7 @@ import (
 	bus "bus_api/core/internal/handler/bus"
 	home "bus_api/core/internal/handler/home"
 	member "bus_api/core/internal/handler/member"
+	wechat "bus_api/core/internal/handler/wechat"
 	"bus_api/core/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -149,5 +150,29 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithPrefix("/api/notice"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Auth},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/list",
+					Handler: wechat.ListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/detail",
+					Handler: wechat.DetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/menu",
+					Handler: wechat.MenuHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/api/wechat"),
 	)
 }
