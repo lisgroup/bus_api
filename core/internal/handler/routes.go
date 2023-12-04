@@ -168,6 +168,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodPost,
+					Path:    "/add",
+					Handler: wechat.AddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/update",
+					Handler: wechat.UpdateHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/delete",
+					Handler: wechat.DeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
 					Path:    "/menu",
 					Handler: wechat.MenuHandler(serverCtx),
 				},

@@ -211,12 +211,12 @@ type WechatRequest struct {
 }
 
 type WechatListResponse struct {
-	List  []Wechat `json:"users"`
+	List  []Wechat `json:"wechats"`
 	Total int64    `json:"total"`
 }
 
 type Wechat struct {
-	Id             int    `json:"id"`
+	Id             int    `json:"id,optional"`
 	AppName        string `json:"app_name"`
 	AppId          string `json:"app_id"`
 	Token          string `json:"token"`
@@ -234,4 +234,23 @@ type WechatMenuRequest struct {
 
 type WechatMenu struct {
 	Menu string `json:"menu"`
+}
+
+type WechatAddRequest struct {
+	Wechat
+}
+
+type WechatUpdateResponse struct {
+	Id int `json:"id"`
+}
+
+type WechatUpdateRequest struct {
+	Wechat
+}
+
+type WechatDeleteRequest struct {
+	Id int64 `json:"id" desc:"id"`
+}
+
+type WechatDeleteResponse struct {
 }

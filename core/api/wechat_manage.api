@@ -1,59 +1,86 @@
 info(
-	desc: "微信管理"
-	author: "lisgroup"
-	email: "lisgroup@qq.com"
+    desc: "微信管理"
+    author: "lisgroup"
+    email: "lisgroup@qq.com"
 )
 
-@server (
+@server(
     // jwt: Auth
-	middleware: Auth
-	group: wechat
-	prefix: /api/wechat
+    middleware: Auth
+    group: wechat
+    prefix: /api/wechat
 )
 service core-api {
-	// 微信配置列表
-	@handler List
-	post /list (WechatRequest) returns (WechatListResponse)
-	// 详情
-	@handler Detail
-	post /detail (WechatDetailRequest) returns (Wechat)
-	// 详情
-	@handler Menu
-	post /menu (WechatMenuRequest) returns (WechatMenu)
+    // 微信配置列表
+    @handler List
+    post /list (WechatRequest) returns (WechatListResponse)
+    // 详情
+    @handler Detail
+    post /detail (WechatDetailRequest) returns (Wechat)
+    // 新增
+    @handler Add
+    post /add (WechatAddRequest) returns (WechatUpdateResponse)
+    // 更新
+    @handler Update
+    post /update (WechatUpdateRequest) returns (WechatUpdateResponse)
+    @handler Delete
+    post /delete (WechatDeleteRequest) returns (WechatDeleteResponse)
+    // Menu
+    @handler Menu
+    post /menu (WechatMenuRequest) returns (WechatMenu)
 }
 
 type WechatRequest {
-	// 查询条件
-	AppName string `json:"app_name,optional"`
-	// 分页
-	Page int `json:"page,optional"`
-	// 每页数量
-	PageSize int `json:"page_size,optional"`
+    // 查询条件
+    AppName string `json:"app_name,optional"`
+    // 分页
+    Page int `json:"page,optional"`
+    // 每页数量
+    PageSize int `json:"page_size,optional"`
 }
 
 type WechatListResponse {
-	List []Wechat `json:"users"`
-	// 总数
-	Total int64 `json:"total"`
+    List []Wechat `json:"wechats"`
+    // 总数
+    Total int64 `json:"total"`
 }
 
 type Wechat {
-	Id          int    `json:"id"`
-	AppName     string `json:"app_name"`
-	AppId       string `json:"app_id"`
-	Token       string `json:"token"`
-	EncodingAesKey string `json:"encoding_aes_key"`
-	Menu        string `json:"menu"`
+    Id int `json:"id,optional"`
+    AppName string `json:"app_name"`
+    AppId string `json:"app_id"`
+    Token string `json:"token"`
+    EncodingAesKey string `json:"encoding_aes_key"`
+    Menu string `json:"menu"`
 }
 
 type WechatDetailRequest {
-	Id string `json:"id"`
+    Id string `json:"id"`
 }
 
 type WechatMenuRequest {
-	Id string `json:"id"`
+    Id string `json:"id"`
 }
 
 type WechatMenu {
-	Menu string `json:"menu"`
+    Menu string `json:"menu"`
+}
+
+type WechatAddRequest {
+    Wechat
+}
+
+type WechatUpdateResponse {
+    Id int `json:"id"`
+}
+
+type WechatUpdateRequest {
+    Wechat
+}
+
+type WechatDeleteRequest {
+	Id          int64 `json:"id" desc:"id"`
+}
+
+type WechatDeleteResponse {
 }
