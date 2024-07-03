@@ -19,7 +19,7 @@ Mysql:
   MaxLifetime: 1 # 单位小时
 
 Redis:
-  Addr:"localhost:6379"
+  Addr: "localhost:6379"
   Password:
   DB: 0
 
