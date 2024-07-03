@@ -22,7 +22,7 @@ type LineLogic struct {
 }
 
 type Line struct {
-	Code string `json:"code"`
+	Code int    `json:"code"`
 	Msg  string `json:"msg"`
 	Data struct {
 		NextBus   string `json:"nextBus"`
@@ -48,7 +48,7 @@ func (l *LineLogic) Line(req *types.LineRequest) (resp *types.LineResponse, err 
 	// 1. 获取html内容
 	// map 记录站台id和公交详情列表的索引
 	var m = map[string]int{}
-	// 发送htt get请求 https://szgj.2500.tv/line/bus?id=0000000000LINELINEINFO18122459783711
+	// 发送http get请求 https://szgj.2500.tv/line/bus?id=0000000000LINELINEINFO18122459783711
 	result, err := http.Get("https://szgj.2500.tv/line/bus?id=" + req.Lineid)
 	if err != nil {
 		return
@@ -86,6 +86,7 @@ func (l *LineLogic) Line(req *types.LineRequest) (resp *types.LineResponse, err 
 
 	// 2. 获取接口内容
 	// 根据sid查找名称
+	// 发送http get请求 https://szgj.2500.tv/api/v1/busline/bus?line_guid=0000000000LINELINEINFO18122459783711
 	res, err := http.Get("https://szgj.2500.tv/api/v1/busline/bus?line_guid=" + req.Lineid)
 	if err != nil {
 		return
@@ -109,7 +110,7 @@ func (l *LineLogic) Line(req *types.LineRequest) (resp *types.LineResponse, err 
 		return
 	}
 	// 解析 StandInfo 数据
-	if bs.Code == "0" {
+	if bs.Code == 0 {
 		for sid, infos := range bs.Data.StandInfo {
 			for _, v := range infos {
 				// 根据 sid 获取站点名称
